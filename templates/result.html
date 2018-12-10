@@ -5,14 +5,14 @@
 </head>
 <body>
 <table>
-    {% for each in result %}
-        {% for key, value in each.items() %}
-            <tr>
-               <td> {{ key }} </td>
-               <td> {{ value }} </td>
-            </tr>
+    <thead>
+    <th>书名</th>
+    <th>作者</th>
+    </thead>
+        {% for each in result %}
+            <td><a href="{{ url_for('introduction',book=each['id'],author=0) }}" >{{ each['bookname'] }}</a></td>
+            <td><a href="{{ url_for('introduction',book=0,author=each['author']) }}" >{{ each['author'] }}</a></td>
         {% endfor %}
-    {% endfor %}
 </table>
 </body>
 </html>
