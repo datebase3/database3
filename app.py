@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from flask import Flask, session, redirect, url_for, escape, request
-from flask import render_template
+from flask import Flask, session, redirect, url_for, escape, request,render_template
+from tools import dbfunc
+
 app = Flask(__name__)
 
 
@@ -15,18 +16,20 @@ def login():
     user = request.form['user']
     password = request.form['password']
     if request.form['login'] == u"登录":
-        if True:#login_user(user,password):#测试用户是否正确
+        if dbfunc.login_user(user,password):#测试用户是否正确
             session["user"] = user
             return render_template('index.html')
         else:
             return render_template('login.html')
     elif request.form['login'] == u"注册":
-        if True:#test_user(user):#测试用户是否存在
+        if dbfunc.test_user(user):#测试用户是否存在
             return render_template('login.html')
         else:
-            #insert_user(user,password)#添加用户
-            session["user"] = user
-            return render_template('index.html')
+            if dbfunc.insert_user(user,password):#添加用户
+                session["user"] = user
+                return render_template('index.html')
+            else:
+                return render_template('login.html')
 
 @app.route('/header.html')
 def navigation_bar():
@@ -35,7 +38,7 @@ def navigation_bar():
 @app.route('/recommend.html')
 def recommend():
     if session.get("user"):
-        result = None#getbooksbyuser(session.get("user"))#通过用户名获取浏览记录，通过看过书的标签获取推荐书单
+        result = dbfunc.getBooksByUser(session.get("user"))#通过用户名获取浏览记录，通过看过书的标签获取推荐书单
         return render_template('recommend.html', result=result)
     else:
         return render_template('login.html')
