@@ -6,9 +6,22 @@ import requests
 from selenium import webdriver
 from bs4 import BeautifulSoup
 from tools.html_cleaner import remove_html_tag
+from pymongo import MongoClient
+from time import sleep
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+
+skip_list = [
+    u'玄幻',
+    u"奇幻",
+    u"武侠",
+    u"仙侠",
+    u"都市",
+    u"现实",
+    u"军事",
+    u"历史",
+]
 
 
 __author__ = "chenshengyuan"
@@ -21,6 +34,7 @@ class spider():
         self.sum = 0
         self.page = 0
         self.begin_url = "https:"
+        self.db = MongoClient('localhost', 27017)
         self.type_list = []
         self.book_list = []
 
@@ -34,7 +48,10 @@ class spider():
         temp1 = soup.select('ul.row-1 > li')
         temp2 = soup.select('ul.row-2 > li')
         temp3 = soup.select('ul.row-3 > li')
-        temp = temp1 +temp2 + temp3
+        # temp4 = []
+        # temp4.append(temp2[-1])
+        temp = temp1+ temp2 + temp3
+        # temp = temp4 + temp3
         if temp is None:
             print "error"
         for li in temp:
@@ -49,6 +66,8 @@ class spider():
 
     def get_list(self,url):
         self.browser.get(url)
+
+    def get_pagesource(self):
         return self.browser.page_source
 
     def extract_list(self,html1):
@@ -57,6 +76,8 @@ class spider():
         if type_temp is None:
             return
         self.book_type = remove_html_tag(type_temp[0].get_text())
+        if self.book_type in skip_list:
+            return u"skip"
         temp1 = soup.select('div.book-mid-info > h4 > a')
         if temp1 is None:
             return
@@ -73,16 +94,26 @@ class spider():
             submit = self.browser.find_element_by_css_selector('#PAGINATION-BUTTON')
         except Exception as e:
             return e.message
-        input.click()
-        input.clear()
-        input.send_keys(pagenumber)
-        submit.click()
+        try:
+            input.clear()
+            input.send_keys(pagenumber)
+            submit.click()
+        except:
+            clicksubmit = self.browser.find_element_by_css_selector('body > div:nth-child(13) > div')
+            clicksubmit.click()
+        try:
+            input.clear()
+            input.send_keys(pagenumber)
+            submit.click()
+        except:
+            pass
 
     def get_detail(self,url):
         self.browser.get(url)
+        sleep(2)
         return self.browser.page_source
 
-    def extract_detail(self,html):
+    def extract_detail(self,html,url):
         update_flag = -1
         if u"连载" in html:
             update_flag = 1
@@ -94,12 +125,17 @@ class spider():
         title_temp = soup.select('div.book-info > h1 > em')
         if title_temp is None:
             return "title get failed"
+        image_temp = soup.select('#bookImg > img')
+        if image_temp is None:
+            return "get image falied"
+        image = remove_html_tag(image_temp[0].get('src'))
         title = remove_html_tag(title_temp[0].get_text())
         author_temp = soup.select('div.book-info > h1 > span > a.writer')
         if author_temp is None:
             return "author get failed"
         author = remove_html_tag(author_temp[0].get_text())
-        brief_temp = soup.select('p.intro')
+        author_url = u"https:"+remove_html_tag(author_temp[0].get('href'))
+        brief_temp = soup.select('div.book-intro > p')
         if brief_temp is None:
             brief = ""
         else:
@@ -111,7 +147,10 @@ class spider():
         moncount_temp = soup.select('#monthCount')
         if moncount_temp is None:
             return "moncount get failed"
-        moncount = remove_html_tag(moncount_temp[0].get_text())
+        try:
+            moncount = remove_html_tag(moncount_temp[0].get_text())
+        except:
+            moncount = "0"
         reccount_temp = soup.select('#recCount')
         if reccount_temp is None:
             return "reccount get failed"
@@ -123,37 +162,59 @@ class spider():
         usercount_temp = soup.select('#j_userCount > span')
         if usercount_temp is None:
             return "usercoount get failed"
-        usercount = remove_html_tag(usercount_temp[0].get_text())
+        try:
+            usercount = remove_html_tag(usercount_temp[0].get_text())
+        except:
+            usercount = 0
         rewardnum_temp = soup.select('#rewardNum')
         if rewardnum_temp is None:
             return "bookscore get failed"
-        rewardnum = remove_html_tag(rewardnum_temp[0].get_text())
+        try:
+            rewardnum = remove_html_tag(rewardnum_temp[0].get_text())
+        except:
+            rewardnum = 0
         self.browser.get(href)
         html1 = self.browser.page_source
+        if u'万' not in html1:
+            self.browser.get(href)
+            html1 = self.browser.page_source
         soup1 = BeautifulSoup(html1,'html5lib')
-        wordcount_temp = soup.select('div.info-list.cf > ul > li:nth-of-type(3) > p > em')
-        wordcount = remove_html_tag(wordcount_temp[0].get_text())+"万"
+        wordcount_temp = soup1.select('div.info-list.cf > ul > li:nth-of-type(3) > p > em')
+        wordcount = remove_html_tag(wordcount_temp[0].get_text())+u"万"
         book = {
             "title": title,
-            "image":"",
+            "image":image,
             "brief":brief,
             "wordcount":wordcount,
             "author":author,
-            "reccount":"",
-            "moncount":"",
+            "author_url":author_url,
+            "reccount":reccount,
+            "moncount":moncount,
+            "bookscore":bookscore,
+            "rewardnum":rewardnum,
+            "usercount":usercount,
+            "updateflag":update_flag,
+            "flag":self.book_type,
+            "url":url
         }
+        if self.db.database.book.find_one({"title": title}):
+            return
+        self.db.database.book.insert(book)
 
     def run(self):
         self.start_selenium()
         self.initial_list()
         for url in self.type_list:
-            for i in range(2,3):
-                html = self.get_list(url)
-                self.extract_list(html)
+            self.get_list(url)
+            for i in range(2,11):
+                html = self.get_pagesource()
+                flag = self.extract_list(html)
                 self.change_page(i)
+            if flag == u"skip":
+                continue
             for book_url in self.book_list:
                 html = self.get_detail(book_url)
-                self.extract_detail(html)
+                self.extract_detail(html,book_url)
             self.book_list = []
 
 
