@@ -1,31 +1,39 @@
 #!/usr/bin/env python
 # -*- coding:utf8 -*-
 import pymongo
+from bson.objectid import ObjectId
 
 MONGO_SERVER = {
-    # 'server': '10.80.94.84',
     'server': 'localhost',
     'port':27017,
-    'db': 'db',
-    'collection': 'url_filter',
-    'user': 'root',
-    'password': '1234'
 }
 type = {
     0:"玄幻",
-    1:"奇幻"
+    1:"奇幻",
+    2:"武侠",
+    3:"仙侠",
+    4:"都市",
+    5:"现实",
+    6:"军事",
+    7:"历史",
+    8:"游戏",
+    9:"体育",
+    10:"科幻",
+    11:"灵异",
+    #12:"二次元",
+    #13:"短篇",
 }
 
 client = pymongo.MongoClient(MONGO_SERVER['server'], MONGO_SERVER['port'])
 
 def login_user(user,password):
-    if client.db.news.find({"user": user,"password": password}):
+    if client.database.user.find_one({"user": user,"password": password}):
         return True
     else:
         return False
 
 def test_user(user):
-    if client.db.news.find({"user": user}):
+    if client.database.user.find_one({"user": user}):
         return True
     else:
         return False
@@ -34,31 +42,42 @@ def insert_user(user,password):
     user_info = {
         "user":user,
         "password":password,
-        "record":[0,0,0,0,0,0,0,0]
+        "record":[1,1,1,1,1,1,1,1,1,1,1,1,1,1]
     }
     try:
-        client.db.news.insert(user_info)
+        client.database.user.insert(user_info)
         return True
     except Exception:
         return False
 
 def getBookByType(number,type_name):
-    books = client.db.news.find({"type": type_name})
+    books = []
+    for book in client.database.book.find({"flag":type_name}):
+        books.append(book)
+    if books == [] or len(books)<number:
+        return
     new_books = []
-    if len(books)>number:
-        for i in range(0,number-1):
-            new_books.append(books[i])
+    for i in range(0,number-1):
+        new_books.append(books[i])
     return new_books
 
 def getBooksByUser(user):
     books = []
-    user_info = client.db.news.find({"user": user})
+    user_info = client.database.user.find_one({"user": user})
     user_record = user_info["record"]
-    total = 0
-    for each in user_record:
-        total = total+each
-    for key,value in type:
+    #total = 0
+    #for each in user_record:
+        #total = total+each
+    total = 12
+    for key,value in type.items():
         number = 100*user_record[key]/total
         type_name = value
-        books.append(getBookByType(number,type_name))
+        if getBookByType(number,type_name)==[]:
+            continue
+        for book in getBookByType(number,type_name):
+            books.append(book)
     return books
+
+def getIntroByBook(book):
+    result = client.database.book.find_one({"_id": ObjectId(book)})
+    return result

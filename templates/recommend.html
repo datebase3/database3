@@ -4,15 +4,23 @@
     <meta charset="UTF-8">
 </head>
 <body>
-<table border=1>
-    {% for each in result %}
-        {% for key, value in each.items() %}
+<table>
+    <thead>
+    <tr>
+        <th>图片</th>
+        <th>书名</th>
+        <th>作者</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for each in result %}
             <tr>
-               <td> {{ key }} </td>
-               <td> {{ value }} </td>
+                <td><a href="{{ url_for('introduction',book=each['_id'],author=0) }}" ><img src="{{ each['image'] }}"></a></td>
+                <td><a href="{{ url_for('introduction',book=each['_id'],author=0) }}" >{{ each['title'] }}</a></td>
+                <td><a href="{{ url_for('introduction',book=0,author=each['author']) }}" >{{ each['author'] }}</a></td>
             </tr>
-         {% endfor %}
-    {% endfor %}
+        {% endfor %}
+    </tbody>
 </table>
 </body>
 </html>

@@ -5,7 +5,7 @@ from flask import Flask, session, redirect, url_for, escape, request,render_temp
 from tools import dbfunc
 
 app = Flask(__name__)
-
+app.config['SECRET_KEY'] = '123456'
 
 @app.route('/')
 def index():
@@ -49,11 +49,13 @@ def introduction():
     author = request.args.get('author')
     if book == "0":
         result = None#getIntroByAuthor(author)
+        return render_template('introduction.html', result=result)#作者介绍界面
     elif author == "0":
-        result = None#getIntroByBook(book)
+        result = dbfunc.getIntroByBook(book)
+        return render_template('introduction.html', result=result)
     else:
         return redirect(url_for('recommend'))
-    return render_template('introduction.html',result=result)
+
 
 @app.route('/test.html')
 def test():

@@ -2,9 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
 </head>
 <body>
-
+<div>
+    <div class="head">
+        <img src="{{ result['image'] }}">
+        <p>{{ result['title'] }}</p>
+        <br/>
+        <p>{{ result['author'] }}</p>
+    </div>
+    <br/>
+    <div>
+        <p>类型：{{ result['flag'] }}   </p>
+        <p>总字数：{{ result['wordcount'] }}   </p>
+        {% if result['updateflag']==1 %}
+            <p>连载中</p>
+        {% else %}
+            <p>已完结</p>
+        {% endif %}
+        <br/>
+        <p>评分：{{ result['bookscore'] }}   </p>
+        <p>参与评分：{{ result['usercount'] }}人</p>
+        <br/>
+        <p>推荐票：{{ result['reccount'] }}   </p>
+        <p>月票：{{ result['moncount'] }}   </p>
+        <p>打赏：{{ result['rewardnum'] }}</p>
+    </div>
+    <br/>
+    <div>简介：{{ result['brief'] }}</div>
+</div>
 </body>
 </html>
