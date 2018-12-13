@@ -32,7 +32,86 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<input type="submit" value=" ">
 				</form>
 			</div>
-			
+            <div class="header-top-right">
+				<div class="signin">
+					<a href="#small-dialog3" class="play-icon popup-with-zoom-anim">注册</a>
+					<!-- pop-up-box -->
+                        <script type="text/javascript" src="../static/js/modernizr.custom.min.js"></script>
+						<link href="../static/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+						<script src="../static/js/jquery.magnific-popup.js" type="text/javascript"></script>
+                        <!--//pop-up-box -->
+						<div id="small-dialog3" class="mfp-hide">
+							<h3>创建账户</h3>
+							<div class="social-sits">
+                                <div class="button-bottom">
+                                    <p>已经有账户? <a href="#small-dialog" class="play-icon popup-with-zoom-anim">登录</a></p>
+                                </div>
+                            </div>
+                            <div class="signup">
+                                <!--提交注册请求表单-->
+                                <form>
+                                    <input type="text" class="email" placeholder="用户名" required="required" pattern="([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?" title="输入用户名"/><br>
+                                    <input type="password" placeholder="密码" required="required" pattern=".{6,}" title="不少于6位" autocomplete="off" /><br>
+                                    <p style="font-size:16px;color:#757575">小说类型喜好选择：</p>
+                                    <p style="font-size:14px;color:#9E9E9E">
+                                        <input name="type1" type="checkbox" value="玄幻"/>&nbsp;玄幻&nbsp;&nbsp;&nbsp;
+                                        <input name="type1" type="checkbox" value="奇幻"/>&nbsp;奇幻&nbsp;&nbsp;&nbsp;
+                                        <input name="type1" type="checkbox" value="武侠"/>&nbsp;武侠&nbsp;&nbsp;&nbsp;
+                                        <input name="type1" type="checkbox" value="仙侠"/>&nbsp;仙侠&nbsp;&nbsp;&nbsp;
+                                        <input name="type1" type="checkbox" value="都市"/>&nbsp;都市<br>
+                                        <input name="type1" type="checkbox" value="现实"/>&nbsp;现实&nbsp;&nbsp;&nbsp;
+                                        <input name="type1" type="checkbox" value="军事"/>&nbsp;军事&nbsp;&nbsp;&nbsp;
+                                        <input name="type1" type="checkbox" value="历史"/>&nbsp;历史&nbsp;&nbsp;&nbsp;
+                                        <input name="type1" type="checkbox" value="游戏"/>&nbsp;游戏&nbsp;&nbsp;&nbsp;
+                                        <input name="type1" type="checkbox" value="体育"/>&nbsp;体育<br>
+                                        <input name="type1" type="checkbox" value="科幻"/>&nbsp;科幻&nbsp;&nbsp;&nbsp;
+                                        <input name="type1" type="checkbox" value="灵异"/>&nbsp;灵异&nbsp;&nbsp;&nbsp;
+                                        <input name="type1" type="checkbox" value="二次元"/>&nbsp;二次元<br>
+                                    </p>
+                                    <input type="submit"  value="注册"/>
+                                </form>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                    <script>
+                        $(document).ready(function() {
+                            $('.popup-with-zoom-anim').magnificPopup({
+                                type: 'inline',
+                                fixedContentPos: false,
+                                fixedBgPos: true,
+                                overflowY: 'auto',
+                                closeBtnInside: true,
+                                preloader: false,
+                                midClick: true,
+                                removalDelay: 300,
+                                mainClass: 'my-mfp-zoom-in'
+                            });
+
+                        });
+                    </script>
+				</div>
+				<div class="signin">
+					<a href="#small-dialog" class="play-icon popup-with-zoom-anim">登录</a>
+					<div id="small-dialog" class="mfp-hide">
+						<h3>登录</h3>
+						<div class="social-sits">
+							<div class="button-bottom">
+								<p>新建账户? <a href="#small-dialog3" class="play-icon popup-with-zoom-anim">注册</a></p>
+							</div>
+						</div>
+						<div class="signup">
+                            <!--提交登录请求表单-->
+							<form>
+								<input type="text" class="email" placeholder="用户名" required="required" pattern="([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?"/>
+								<input type="password" placeholder="密码" required="required" pattern=".{6,}" title="不少于6位" autocomplete="off" />
+								<input type="submit"  value="登录"/>
+							</form>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
         </div>
 		<div class="clearfix"> </div>
       </div>
@@ -41,7 +120,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="top-navigation">
 				<div class="t-menu">菜单</div>
 				<div class="t-img">
-					<img src="./images/lines.png" alt="" />
+					<img src="../static/images/lines.png" alt="" />
 				</div>
 				<div class="clearfix"> </div>
 			</div>
@@ -53,8 +132,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<ul class="cl-effect-1">
 							<li><a href="classify.html">玄幻</a></li>
 							<li><a href="classify.html">奇幻</a></li>
-							<li><a href="classify.html">仙侠</a></li>
 							<li><a href="classify.html">武侠</a></li>
+							<li><a href="classify.html">仙侠</a></li>
 							<li><a href="classify.html">都市</a></li>
 							<li><a href="classify.html">现实</a></li>
 							<li><a href="classify.html">军事</a></li>
@@ -62,7 +141,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<li><a href="classify.html">游戏</a></li>
 							<li><a href="classify.html">体育</a></li>
 							<li><a href="classify.html">科幻</a></li>
-							<li><a href="classify.html">悬疑灵异</a></li>
+							<li><a href="classify.html">灵异</a></li>
+                            <li><a href="classify.html">二次元</a></li>
 						</ul>
 						<!-- script-for-menu -->
 						<script>
