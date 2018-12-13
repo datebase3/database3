@@ -10,8 +10,9 @@ app.config['SECRET_KEY'] = '123456'
 @app.route('/')
 @app.route('/index.html')
 def index():
-    result = dbfunc.getBookByType(10,"玄幻")
-    return render_template('index.html',result = result)
+    books = dbfunc.getBookRandomly()#分页
+    recbook = dbfunc.getBooksByUser("session['user']")
+    return render_template('index.html',books = books,recbook = recbook)
 
 @app.route('/authorList.html')
 def authorList():

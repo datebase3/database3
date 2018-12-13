@@ -88,7 +88,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="main-grids">
 				<div class="top-grids">
 						<div class="recommended-info">
-							<h3>热门小说</h3>
+							<h3>推荐书籍</h3>
 						</div>
 						<script src="../static/js/responsiveslides.min.js"></script>
 						 <script>
@@ -115,21 +115,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<ul class="rslides" id="slider3">
 								<li>
 									<div id="slider-time1" class="animated-grids">
-                                        {% for work in result[0:4] %}
+                                        {% for work in recbook[0:4] %}
                                         <div class="col-md-3 resent-grid recommended-grid slider-first">
                                             <div class="resent-grid-img recommended-grid-img">
                                                 <a href="./novalDetail.html"><img src="{{ work['image'] }}" alt="" /></a>
                                             </div>
                                             <div class="resent-grid-info recommended-grid-info">
-                                                <p><a href="./novalDetail.html" class="title">{{ work['title'] }}</a></p>
                                                 <p class="author author-info"><a href="#" class="author">{{ work['author'] }}</a></p>
                                                 <p class="views">
-                                                    {% if work['updateflag']==1 %}
-                                                        连载中
-                                                    {% else %}
-                                                        已完结
-                                                    {% endif %}
-                                                    {{ work['wordcount'] }} </p>
+                                                {% if work['updateflag']==1 %}
+                                                    连载中
+                                                {% else %}
+                                                    已完结
+                                                {% endif %}
+                                                {{ work['wordcount'] }} </p>
                                             </div>
                                         </div>
                                         {% endfor %}
@@ -137,21 +136,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								</li>
 								<li>
 									<div id="slider-time2" class="animated-grids">
-                                        {% for work in result[4:8] %}
+                                        {% for work in recbook[4:8] %}
                                         <div class="col-md-3 resent-grid recommended-grid slider-first">
                                             <div class="resent-grid-img recommended-grid-img">
                                                 <a href="./novalDetail.html"><img src="{{ work['image'] }}" alt="" /></a>
                                             </div>
                                             <div class="resent-grid-info recommended-grid-info">
-                                                <p><a href="./novalDetail.html" class="title">{{ work['title'] }}</a></p>
                                                 <p class="author author-info"><a href="#" class="author">{{ work['author'] }}</a></p>
                                                 <p class="views">
-                                                    {% if work['updateflag']==1 %}
-                                                        连载中
-                                                    {% else %}
-                                                        已完结
-                                                    {% endif %}
-                                                    {{ work['wordcount'] }} </p>
+                                                {% if work['updateflag']==1 %}
+                                                    连载中
+                                                {% else %}
+                                                    已完结
+                                                {% endif %}
+                                                {{ work['wordcount'] }} </p>
                                             </div>
                                         </div>
                                         {% endfor %}
@@ -165,9 +163,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="recommended">
 					<div id="all-work" class="recommended-grids">
 						<div class="recommended-info">
-							<h3>全部小说</h3>
+							<h3>精品小说</h3>
 						</div>
-                        {% for work in result %}
+                        {% for work in books %}
                         <div class="col-md-2 resent-grid recommended-grid">
 							<div class="resent-grid-img recommended-grid-img">
 								<a href="./novalDetail.html"><img src="{{ work['image'] }}" alt="" /></a>

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf8 -*-
+import random
 import pymongo
 from bson.objectid import ObjectId
 
@@ -20,8 +21,7 @@ type = {
     9:"体育",
     10:"科幻",
     11:"灵异",
-    #12:"二次元",
-    #13:"短篇",
+    12:"二次元"
 }
 
 client = pymongo.MongoClient(MONGO_SERVER['server'], MONGO_SERVER['port'])
@@ -42,13 +42,23 @@ def insert_user(user,password):
     user_info = {
         "user":user,
         "password":password,
-        "record":[1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+        "record":[0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1]
     }
     try:
         client.database.user.insert(user_info)
         return True
     except Exception:
         return False
+
+def getBookRandomly():
+    numberList = []
+    for i in range(18):
+        numberList.append(random.randint(1,1500))
+    books = []
+    for number in numberList:
+        for each in client.database.book.find().limit(1).skip(number):
+            books.append(each)
+    return books
 
 def getBookByType(number,type_name):
     books = []
@@ -63,20 +73,29 @@ def getBookByType(number,type_name):
 
 def getBooksByUser(user):
     books = []
-    user_info = client.database.user.find_one({"user": user})
-    user_record = user_info["record"]
-    #total = 0
-    #for each in user_record:
-        #total = total+each
-    total = 12
+    #user_info = client.database.user.find_one({"user": user})
+    #user_record = user_info["record"]
+    user_record = [0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1]
+    total = 0
+    for each in user_record:
+        total = total+each
     for key,value in type.items():
-        number = 100*user_record[key]/total
+        number = int(8*user_record[key]/total)
+        if number == 0:
+            continue
         type_name = value
         if getBookByType(number,type_name)==[]:
             continue
         for book in getBookByType(number,type_name):
             books.append(book)
-    return books
+    empty_num = 8-len(books)
+    if empty_num!=0:
+        for new_book in client.database.book.find():
+            books.append(new_book)
+    new_books = []
+    for i in range(8):
+        new_books.append(books[i])
+    return new_books
 
 def getIntroByBook(book):
     result = client.database.book.find_one({"_id": ObjectId(book)})
