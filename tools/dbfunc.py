@@ -81,3 +81,19 @@ def getBooksByUser(user):
 def getIntroByBook(book):
     result = client.database.book.find_one({"_id": ObjectId(book)})
     return result
+
+def prefer_add(user,flag):
+    change_num = -1
+    for key, value in type.items():
+        if flag == value:
+            change_num = key
+    if change_num == -1:
+        return False
+    try:
+        user_info = client.database.user.find_one({"user": user})
+        record = user_info['record']
+        record[change_num] = record[change_num]+2
+        client.database.user.update({'user': user}, {'$set': {'record': record}})
+        return True
+    except Exception:
+        return False

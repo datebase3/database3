@@ -51,8 +51,12 @@ def introduction():
         result = None#getIntroByAuthor(author)
         return render_template('introduction.html', result=result)#作者介绍界面
     elif author == "0":
+        user = session["user"]
         result = dbfunc.getIntroByBook(book)
-        return render_template('introduction.html', result=result)
+        if dbfunc.prefer_add(user,result['flag']):#用户点击书籍简介的行为会存入其偏好
+            return render_template('introduction.html', result=result)
+        else:
+            return redirect(url_for('recommend'))
     else:
         return redirect(url_for('recommend'))
 
