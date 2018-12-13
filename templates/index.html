@@ -1,23 +1,202 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>小说简介站</title>
-        <style>
-                body{height:700px;}
-            #header {
-                height:20%;
-                width:100%;
-            }
-            #content {
-                height: 80%;
-                width: 100%;
-            }
-        </style>
-    </head>
-    <body>
-     <iframe id="header" name="header" frameborder="0" src="header.html"></iframe>
-     <iframe height="100%" marginheight="0" id="content" name="content" frameborder="0" src="recommend.html"></iframe>
-    </body>
-
+<html>
+<head>
+<title>主页</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="My Play Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- bootstrap -->
+<link href="../static/css/bootstrap.min.css" rel='stylesheet' type='text/css' media="all" />
+<!-- //bootstrap -->
+<link href="../static/css/dashboard.css" rel="stylesheet">
+<!-- Custom Theme files -->
+<link href="../static/css/style.css" rel='stylesheet' type='text/css' media="all" />
+<script src="../static/js/jquery-1.11.1.min.js"></script>
+<!--start-smoth-scrolling-->
+<!-- fonts -->
+<link href='http://fonts.useso.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+<link href='http://fonts.useso.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+<!-- //fonts -->
+</head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:#272c2e">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="./index.html"><h3>源点网络小说简介网</h3></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+			<div class="top-search">
+				<form class="navbar-form navbar-right">
+					<input type="text" class="form-control" placeholder="搜索...">
+					<input type="submit" value=" ">
+				</form>
+			</div>
+			
+        </div>
+		<div class="clearfix"> </div>
+      </div>
+    </nav>
+        <div class="col-sm-3 col-md-2 sidebar">
+			<div class="top-navigation">
+				<div class="t-menu">菜单</div>
+				<div class="t-img">
+					<img src="./images/lines.png" alt="" />
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+				<div class="drop-navigation drop-navigation">
+				  <ul class="nav nav-sidebar">
+					<li class="active"><a href="./index.html" class="home-icon"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>主页</a></li>
+					<li><a href="authorList.html" class="user-icon"><span class="glyphicon glyphicon-home glyphicon-list-alt" aria-hidden="true"></span>作家列表</a></li>
+					<li><a href="#" class="menu1"><span class="glyphicon glyphicon-home glyphicon-tasks" aria-hidden="true"></span>小说分类<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a></li>
+						<ul class="cl-effect-1">
+							<li><a href="classify.html">玄幻</a></li>
+							<li><a href="classify.html">奇幻</a></li>
+							<li><a href="classify.html">仙侠</a></li>
+							<li><a href="classify.html">武侠</a></li>
+							<li><a href="classify.html">都市</a></li>
+							<li><a href="classify.html">现实</a></li>
+							<li><a href="classify.html">军事</a></li>
+							<li><a href="classify.html">历史</a></li>
+							<li><a href="classify.html">游戏</a></li>
+							<li><a href="classify.html">体育</a></li>
+							<li><a href="classify.html">科幻</a></li>
+							<li><a href="classify.html">悬疑灵异</a></li>
+						</ul>
+						<!-- script-for-menu -->
+						<script>
+							$( "li a.menu1" ).click(function() {
+							$( "ul.cl-effect-1" ).slideToggle( 300, function() {
+							// Animation complete.
+							});
+							});
+						</script>
+					 </ul>
+				  <!-- script-for-menu -->
+						<script>
+							$( ".top-navigation" ).click(function() {
+							$( ".drop-navigation" ).slideToggle( 300, function() {
+							// Animation complete.
+							});
+							});
+						</script>
+					
+				</div>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+			<div class="main-grids">
+				<div class="top-grids">
+						<div class="recommended-info">
+							<h3>热门小说</h3>
+						</div>
+						<script src="../static/js/responsiveslides.min.js"></script>
+						 <script>
+							// You can also use "$(window).load(function() {"
+							$(function () {
+							  // Slideshow 4
+							  $("#slider3").responsiveSlides({
+								auto: true,
+								pager: false,
+								nav: false,
+								speed: 500,
+								namespace: "callbacks",
+								before: function () {
+								  $('.events').append("<li>before event fired.</li>");
+								},
+								after: function () {
+								  $('.events').append("<li>after event fired.</li>");
+								}
+							  });
+						
+							});
+						  </script>
+						<div  id="top" class="callbacks_container">
+							<ul class="rslides" id="slider3">
+								<li>
+									<div id="slider-time1" class="animated-grids">
+                                        {% for work in result[0:4] %}
+                                        <div class="col-md-3 resent-grid recommended-grid slider-first">
+                                            <div class="resent-grid-img recommended-grid-img">
+                                                <a href="./novalDetail.html"><img src="{{ work['image'] }}" alt="" /></a>
+                                            </div>
+                                            <div class="resent-grid-info recommended-grid-info">
+                                                <p><a href="./novalDetail.html" class="title">{{ work['title'] }}</a></p>
+                                                <p class="author author-info"><a href="#" class="author">{{ work['author'] }}</a></p>
+                                                <p class="views">
+                                                    {% if work['updateflag']==1 %}
+                                                        连载中
+                                                    {% else %}
+                                                        已完结
+                                                    {% endif %}
+                                                    {{ work['wordcount'] }} </p>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+								</li>
+								<li>
+									<div id="slider-time2" class="animated-grids">
+                                        {% for work in result[4:8] %}
+                                        <div class="col-md-3 resent-grid recommended-grid slider-first">
+                                            <div class="resent-grid-img recommended-grid-img">
+                                                <a href="./novalDetail.html"><img src="{{ work['image'] }}" alt="" /></a>
+                                            </div>
+                                            <div class="resent-grid-info recommended-grid-info">
+                                                <p><a href="./novalDetail.html" class="title">{{ work['title'] }}</a></p>
+                                                <p class="author author-info"><a href="#" class="author">{{ work['author'] }}</a></p>
+                                                <p class="views">
+                                                    {% if work['updateflag']==1 %}
+                                                        连载中
+                                                    {% else %}
+                                                        已完结
+                                                    {% endif %}
+                                                    {{ work['wordcount'] }} </p>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+									</div>
+								</li>
+								
+							</ul>
+						</div>
+					</div>
+				
+				<div class="recommended">
+					<div id="all-work" class="recommended-grids">
+						<div class="recommended-info">
+							<h3>全部小说</h3>
+						</div>
+                        {% for work in result %}
+                        <div class="col-md-2 resent-grid recommended-grid">
+							<div class="resent-grid-img recommended-grid-img">
+								<a href="./novalDetail.html"><img src="{{ work['image'] }}" alt="" /></a>
+							</div>
+							<div class="resent-grid-info recommended-grid-info video-info-grid">
+								<p><a href="./novalDetail.html" class="title">{{ work['title'] }}</a></p>
+								<p class="author author-info"><a href="#" class="author">{{ work['author'] }}</a></p>
+								<p class="views">
+                                    {% if work['updateflag']==1 %}
+                                        连载中
+                                    {% else %}
+                                        已完结
+                                    {% endif %}
+                                    {{ work['wordcount'] }} </p>
+							</div>
+						</div>
+                        {% endfor %}
+						<div class="clearfix"> </div>
+					</div>
+					
+				</div>
+			</div>
+			
+		</div>
+		<div class="clearfix"> </div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../static/js/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+  </body>
 </html>

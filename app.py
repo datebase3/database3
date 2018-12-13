@@ -8,8 +8,14 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = '123456'
 
 @app.route('/')
+@app.route('/index.html')
 def index():
-    return render_template('login.html')
+    result = dbfunc.getBookByType(10,"玄幻")
+    return render_template('index.html',result = result)
+
+@app.route('/authorList.html')
+def authorList():
+    return render_template('authorList.html')
 
 @app.route('/login',methods=['GET', 'POST'])
 def login():
@@ -53,10 +59,10 @@ def introduction():
     elif author == "0":
         user = session["user"]
         result = dbfunc.getIntroByBook(book)
-        if dbfunc.prefer_add(user,result['flag']):#用户点击书籍简介的行为会存入其偏好
-            return render_template('introduction.html', result=result)
-        else:
-            return redirect(url_for('recommend'))
+        return render_template('introduction.html', result=result)
+        #if dbfunc.prefer_add(user,result['flag']):#用户点击书籍简介的行为会存入其偏好
+        #else:
+            #return redirect(url_for('recommend'))
     else:
         return redirect(url_for('recommend'))
 

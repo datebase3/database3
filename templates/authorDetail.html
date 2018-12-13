@@ -1,0 +1,305 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>作家详情</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="My Play Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- bootstrap -->
+<link href="../static/css/bootstrap.min.css" rel='stylesheet' type='text/css' media="all" />
+<!-- //bootstrap -->
+<link href="../static/css/dashboard.css" rel="stylesheet">
+<!-- Custom Theme files -->
+<link href="../static/css/style.css" rel='stylesheet' type='text/css' media="all" />
+<script src="../static/js/jquery-1.11.1.min.js"></script>
+<!--start-smoth-scrolling-->
+<!-- fonts -->
+<link href='http://fonts.useso.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+<link href='http://fonts.useso.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+<!-- //fonts -->
+</head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:#272c2e">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="index.html"><h3>源点网络小说简介网</h3></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+			<div class="top-search">
+				<form class="navbar-form navbar-right">
+					<input type="text" class="form-control" placeholder="搜索...">
+					<input type="submit" value=" ">
+				</form>
+			</div>
+			
+        </div>
+		<div class="clearfix"> </div>
+      </div>
+    </nav>
+        <div class="col-sm-3 col-md-2 sidebar">
+			<div class="top-navigation">
+				<div class="t-menu">菜单</div>
+				<div class="t-img">
+					<img src="images/lines.png" alt="" />
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+				<div class="drop-navigation drop-navigation">
+				  <ul class="nav nav-sidebar">
+					<li><a href="index.html" class="home-icon"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>主页</a></li>
+					<li><a href="authorList.html" class="user-icon"><span class="glyphicon glyphicon-home glyphicon-list-alt" aria-hidden="true"></span>作家列表</a></li>
+					<li><a href="#" class="menu1"><span class="glyphicon glyphicon-home glyphicon-tasks" aria-hidden="true"></span>小说分类<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a></li>
+						<ul class="cl-effect-1">
+							<li><a href="classify.html">玄幻</a></li>                                             
+							<li><a href="classify.html">奇幻</a></li>
+							<li><a href="classify.html">仙侠</a></li> 
+							<li><a href="classify.html">武侠</a></li>                                             
+							<li><a href="classify.html">都市</a></li>
+							<li><a href="classify.html">现实</a></li>                                             
+							<li><a href="classify.html">军事</a></li>
+							<li><a href="classify.html">历史</a></li> 
+							<li><a href="classify.html">游戏</a></li> 
+							<li><a href="classify.html">体育</a></li>                                             
+							<li><a href="classify.html">科幻</a></li>
+							<li><a href="classify.html">悬疑灵异</a></li> 
+						</ul>
+						<!-- script-for-menu -->
+						<script>
+							$( "li a.menu1" ).click(function() {
+							$( "ul.cl-effect-1" ).slideToggle( 300, function() {
+							// Animation complete.
+							});
+							});
+						</script>
+					 </ul>
+				  <!-- script-for-menu -->
+						<script>
+							$( ".top-navigation" ).click(function() {
+							$( ".drop-navigation" ).slideToggle( 300, function() {
+							// Animation complete.
+							});
+							});
+						</script>
+					
+				</div>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+			<div class="show-top-grids">
+				<div class="col-sm-8 single-left">
+					<div class="single-grid-left">
+						<div class="single-left-grids">
+							<div class="col-md-4 single-right-grid-left">
+								<!-- novalDetail.html 改成起点小说链接 -->
+								<a href="novalDetail.html"><img src="https://facepic.qidian.com/qd_face/349573/a4921/0" alt="" /></a>
+							</div>
+							<div class="col-md-8 single-right-grid-right">
+								<!-- novalDetail.html 改成起点小说链接 -->
+								<p>
+									<a href="novalDetail.html" class="title" style="font-size:24px">唐家三少</a>&nbsp &nbsp &nbsp &nbsp 
+									<a href="#" class="author" style="font-size:16px">白金</a>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+								</p>
+								<p>
+									<a style="font-size:14px">作品总数 18</a>&nbsp &nbsp &nbsp &nbsp
+									<a style="font-size:14px">累计字数 3939.54万</a>&nbsp &nbsp &nbsp &nbsp
+								</p>
+								<p style="font-size:14px;color:gray">创作天数 4944天</p>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+						
+					</div>
+					
+					<div class="clearfix"> </div>
+					<div class="published">
+						<script src="jquery.min.js"></script>
+							<script>
+								$(document).ready(function () {
+									size_li = $("#myList li").size();
+									x=1;
+									$('#myList li:lt('+x+')').show();
+									$('#loadMore').click(function () {
+										x= (x+1 <= size_li) ? x+1 : size_li;
+										$('#myList li:lt('+x+')').show();
+									});
+									$('#showLess').click(function () {
+										x=(x-1<0) ? 1 : x-1;
+										$('#myList li').not(':lt('+x+')').hide();
+									});
+								});
+							</script>
+							<div class="load_more">	
+								<ul id="myList">
+									<li>
+										<h4>作家简介</h4>
+										<p>阅文集团白金作家，中国作协主席团委员，北京青联委员，网络文学代表人物之一，蝉联多年作家富豪榜榜首</p>
+									</li>
+									
+								</ul>
+							</div>
+					</div>
+					<div class="recommended">
+						<div id="author-work" class="recommended-grids">
+							<div class="recommended-info">
+								<h3>全部作品</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 single-right">
+					<h3>作家推荐</h3>
+					<div class="single-grid-right">
+						<div class="single-right-grids">
+							<div class="col-md-4 single-right-grid-left">
+								<a href="novalDetail.html"><img src="images/author1.png" alt="" /></a>
+							</div>
+							<div class="col-md-8 single-right-grid-right">
+								<a href="novalDetail.html" class="title"> Nullam interdum metus</a>
+								<p class="author"><a href="#" class="author">John Maniya</a></p>
+								<p class="views">2,114,200 views</p>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+						<div class="single-right-grids">
+							<div class="col-md-4 single-right-grid-left">
+								<a href="novalDetail.html"><img src="images/author1.png" alt="" /></a>
+							</div>
+							<div class="col-md-8 single-right-grid-right">
+								<a href="novalDetail.html" class="title"> Nullam interdum metus</a>
+								<p class="author"><a href="#" class="author">John Maniya</a></p>
+								<p class="views">2,114,200 views </p>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+						<div class="single-right-grids">
+							<div class="col-md-4 single-right-grid-left">
+								<a href="novalDetail.html"><img src="images/author1.png" alt="" /></a>
+							</div>
+							<div class="col-md-8 single-right-grid-right">
+								<a href="novalDetail.html" class="title"> Nullam interdum metus</a>
+								<p class="author"><a href="#" class="author">John Maniya</a></p>
+								<p class="views">2,114,200 views</p>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+						<div class="single-right-grids">
+							<div class="col-md-4 single-right-grid-left">
+								<a href="novalDetail.html"><img src="images/author1.png" alt="" /></a>
+							</div>
+							<div class="col-md-8 single-right-grid-right">
+								<a href="novalDetail.html" class="title"> Nullam interdum metus</a>
+								<p class="author"><a href="#" class="author">John Maniya</a></p>
+								<p class="views">2,114,200 views</p>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+						<div class="single-right-grids">
+							<div class="col-md-4 single-right-grid-left">
+								<a href="novalDetail.html"><img src="images/author1.png" alt="" /></a>
+							</div>
+							<div class="col-md-8 single-right-grid-right">
+								<a href="novalDetail.html" class="title"> Nullam interdum metus</a>
+								<p class="author"><a href="#" class="author">John Maniya</a></p>
+								<p class="views">2,114,200 views</p>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+						<div class="single-right-grids">
+							<div class="col-md-4 single-right-grid-left">
+								<a href="novalDetail.html"><img src="images/author1.png" alt="" /></a>
+							</div>
+							<div class="col-md-8 single-right-grid-right">
+								<a href="novalDetail.html" class="title"> Nullam interdum metus</a>
+								<p class="author">By <a href="#" class="author">John Maniya</a></p>
+								<p class="views">2,114,200 views</p>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+						<div class="single-right-grids">
+							<div class="col-md-4 single-right-grid-left">
+								<a href="novalDetail.html"><img src="images/author1.png" alt="" /></a>
+							</div>
+							<div class="col-md-8 single-right-grid-right">
+								<a href="novalDetail.html" class="title"> Nullam interdum metus</a>
+								<p class="author"><a href="#" class="author">John Maniya</a></p>
+								<p class="views">2,114,200 views</p>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+						<div class="single-right-grids">
+							<div class="col-md-4 single-right-grid-left">
+								<a href="novalDetail.html"><img src="images/author1.png" alt="" /></a>
+							</div>
+							<div class="col-md-8 single-right-grid-right">
+								<a href="novalDetail.html" class="title"> Nullam interdum metus</a>
+								<p class="author"><a href="#" class="author">John Maniya</a></p>
+								<p class="views">2,114,200 views</p>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+						<div class="single-right-grids">
+							<div class="col-md-4 single-right-grid-left">
+								<a href="novalDetail.html"><img src="images/author1.png" alt="" /></a>
+							</div>
+							<div class="col-md-8 single-right-grid-right">
+								<a href="novalDetail.html" class="title"> Nullam interdum metus</a>
+								<p class="author"><a href="#" class="author">John Maniya</a></p>
+								<p class="views">2,114,200 views</p>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+						<div class="single-right-grids">
+							<div class="col-md-4 single-right-grid-left">
+								<a href="novalDetail.html"><img src="images/author1.png" alt="" /></a>
+							</div>
+							<div class="col-md-8 single-right-grid-right">
+								<a href="novalDetail.html" class="title"> Nullam interdum metus</a>
+								<p class="author"><a href="#" class="author">John Maniya</a></p>
+								<p class="views">2,114,200 views</p>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+
+		</div>
+		<div class="clearfix"> </div>
+		<!-- script -->
+		<script>
+			var works = [
+				{_id:"", author:"唐家三少", bookscore:"", brief:"", flag:"", image:"https://qidian.qpic.cn/qdbimg/349573/1012237441/300", moncount:"", recount:"142.21万", rewardnum:"16", title:"斗罗大陆外传唐门英雄传 ", updateflag:"连载",usercount:"48", wordcount:"9.28万字"},
+				{_id:"", author:"唐家三少", bookscore:"", brief:"", flag:"", image:"https://qidian.qpic.cn/qdbimg/349573/1012237441/300", moncount:"", recount:"142.21万", rewardnum:"16", title:"斗罗大陆外传唐门英雄传 ", updateflag:"连载",usercount:"48", wordcount:"9.28万字"},
+				{_id:"", author:"唐家三少", bookscore:"", brief:"", flag:"", image:"https://qidian.qpic.cn/qdbimg/349573/1012237441/300", moncount:"", recount:"142.21万", rewardnum:"16", title:"斗罗大陆外传唐门英雄传 ", updateflag:"连载",usercount:"48", wordcount:"9.28万字"},
+				{_id:"", author:"唐家三少", bookscore:"", brief:"", flag:"", image:"https://qidian.qpic.cn/qdbimg/349573/1012237441/300", moncount:"", recount:"142.21万", rewardnum:"16", title:"斗罗大陆外传唐门英雄传 ", updateflag:"连载",usercount:"48", wordcount:"9.28万字"},
+				{_id:"", author:"唐家三少", bookscore:"", brief:"", flag:"", image:"https://qidian.qpic.cn/qdbimg/349573/1012237441/300", moncount:"", recount:"142.21万", rewardnum:"16", title:"斗罗大陆外传唐门英雄传 ", updateflag:"连载",usercount:"48", wordcount:"9.28万字"},
+				{_id:"", author:"唐家三少", bookscore:"", brief:"", flag:"", image:"https://qidian.qpic.cn/qdbimg/349573/1012237441/300", moncount:"", recount:"142.21万", rewardnum:"16", title:"斗罗大陆外传唐门英雄传 ", updateflag:"连载",usercount:"48", wordcount:"9.28万字"},
+				{_id:"", author:"唐家三少", bookscore:"", brief:"", flag:"", image:"https://qidian.qpic.cn/qdbimg/349573/1012237441/300", moncount:"", recount:"142.21万", rewardnum:"16", title:"斗罗大陆外传唐门英雄传 ", updateflag:"连载",usercount:"48", wordcount:"9.28万字"},
+				{_id:"", author:"唐家三少", bookscore:"", brief:"", flag:"", image:"https://qidian.qpic.cn/qdbimg/349573/1012237441/300", moncount:"", recount:"142.21万", rewardnum:"16", title:"斗罗大陆外传唐门英雄传 ", updateflag:"连载",usercount:"48", wordcount:"9.28万字"},
+				];
+				
+			var num = works.length;
+			
+			for (var i=0; i<num; i++) {
+				$("#author-work").append(
+					'<div class="col-md-3 resent-grid recommended-grid movie-video-grid">' +
+						'<div class="resent-grid-img recommended-grid-img">'+
+							'<a href="novalDetail.html"><img src="' + works[i].image + '" alt="" /></a>'+
+						'</div>'+
+						'<div class="resent-grid-info recommended-grid-info recommended-grid-movie-info">'+
+							'<p><a href="novalDetail.html" class="title">' + works[i].title + '</a></p>'+
+							'<p class="views">' + works[i].updateflag + '  '+ works[i].wordcount + '</p>'+
+						'</div>'+
+					'</div>'
+				);
+			}
+		</script>	
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../static/js/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+  </body>
+</html>

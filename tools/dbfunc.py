@@ -57,7 +57,7 @@ def getBookByType(number,type_name):
     if books == [] or len(books)<number:
         return
     new_books = []
-    for i in range(0,number-1):
+    for i in range(0,number):
         new_books.append(books[i])
     return new_books
 

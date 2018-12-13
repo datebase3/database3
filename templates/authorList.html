@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>作家列表</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="My Play Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- bootstrap -->
+<link href="../static/css/bootstrap.min.css" rel='stylesheet' type='text/css' media="all" />
+<!-- //bootstrap -->
+<link href="../static/css/dashboard.css" rel="stylesheet">
+<!-- Custom Theme files -->
+<link href="../static/css/style.css" rel='stylesheet' type='text/css' media="all" />
+<script src="../static/js/jquery-1.11.1.min.js"></script>
+<!--start-smoth-scrolling-->
+<!-- fonts -->
+<link href='http://fonts.useso.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+<link href='http://fonts.useso.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+<!-- //fonts -->
+</head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:#272c2e">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="index.html"><h3>源点网络小说简介网</h3></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+			<div class="top-search">
+				<form class="navbar-form navbar-right">
+					<input type="text" class="form-control" placeholder="搜索...">
+					<input type="submit" value=" ">
+				</form>
+			</div>
+			
+        </div>
+		<div class="clearfix"> </div>
+      </div>
+    </nav>
+		<div class="col-sm-3 col-md-2 sidebar">
+			<div class="top-navigation">
+				<div class="t-menu">菜单</div>
+				<div class="t-img">
+					<img src="images/lines.png" alt="" />
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+				<div class="drop-navigation drop-navigation">
+				  <ul class="nav nav-sidebar">
+					<li><a href="index.html" class="home-icon"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>主页</a></li>
+					<li class="active"><a href="authorList.html" class="user-icon"><span class="glyphicon glyphicon-home glyphicon-list-alt" aria-hidden="true"></span>作家列表</a></li>
+					<li><a href="#" class="menu1"><span class="glyphicon glyphicon-home glyphicon-tasks" aria-hidden="true"></span>小说分类<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a></li>
+						<ul class="cl-effect-1">
+							<li><a href="classify.html">玄幻</a></li>                                             
+							<li><a href="classify.html">奇幻</a></li>
+							<li><a href="classify.html">仙侠</a></li> 
+							<li><a href="classify.html">武侠</a></li>                                             
+							<li><a href="classify.html">都市</a></li>
+							<li><a href="classify.html">现实</a></li>                                             
+							<li><a href="classify.html">军事</a></li>
+							<li><a href="classify.html">历史</a></li> 
+							<li><a href="classify.html">游戏</a></li> 
+							<li><a href="classify.html">体育</a></li>                                             
+							<li><a href="classify.html">科幻</a></li>
+							<li><a href="classify.html">悬疑灵异</a></li> 
+						</ul>
+						<!-- script-for-menu -->
+						<script>
+							$( "li a.menu1" ).click(function() {
+							$( "ul.cl-effect-1" ).slideToggle( 300, function() {
+							// Animation complete.
+							});
+							});
+						</script>
+					 </ul>
+				  <!-- script-for-menu -->
+						<script>
+							$( ".top-navigation" ).click(function() {
+							$( ".drop-navigation" ).slideToggle( 300, function() {
+							// Animation complete.
+							});
+							});
+						</script>
+					
+				</div>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+			<div class="main-grids">
+				<div class="top-grid">
+					<div class="recommended">
+						<div id="recommended-author" class="recommended-grids english-grid">
+							<div class="recommended-info">
+								<div class="heading">
+									<h3>推荐作者</h3>
+								</div>
+								<div class="clearfix"> </div>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+						
+					</div>
+					<div class="recommended">
+						<div id="all-author" class="recommended-grids">
+							<div class="recommended-info">
+								<div class="heading">
+									<h3>全部作者</h3>
+								</div>
+								<div class="clearfix"> </div>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+
+		</div>
+		<div class="clearfix"> </div>
+		<!-- script -->
+		<script>
+			var authors = [
+				{_id:"", total_day: "4944天", tag:"白金", total_book:"18", img:"images/author1.png", author: "唐家三少", url: "https://my.qidian.com/author/4921", total_word:"3939.54万", brief:"阅文集团白金作家，中国作协主席团委员，北京青联委员，网络文学代表人物之一，蝉联多年作家富豪榜榜首"},
+				{_id:"", total_day: "4944天", tag:"白金", total_book:"18", img:"images/author1.png", author: "唐家三少", url: "https://my.qidian.com/author/4921", total_word:"3939.54万", brief:"阅文集团白金作家，中国作协主席团委员，北京青联委员，网络文学代表人物之一，蝉联多年作家富豪榜榜首"},
+				{_id:"", total_day: "4944天", tag:"白金", total_book:"18", img:"images/author1.png", author: "唐家三少", url: "https://my.qidian.com/author/4921", total_word:"3939.54万", brief:"阅文集团白金作家，中国作协主席团委员，北京青联委员，网络文学代表人物之一，蝉联多年作家富豪榜榜首"},
+				{_id:"", total_day: "4944天", tag:"白金", total_book:"18", img:"images/author1.png", author: "唐家三少", url: "https://my.qidian.com/author/4921", total_word:"3939.54万", brief:"阅文集团白金作家，中国作协主席团委员，北京青联委员，网络文学代表人物之一，蝉联多年作家富豪榜榜首"},
+				{_id:"", total_day: "4944天", tag:"白金", total_book:"18", img:"images/author1.png", author: "唐家三少", url: "https://my.qidian.com/author/4921", total_word:"3939.54万", brief:"阅文集团白金作家，中国作协主席团委员，北京青联委员，网络文学代表人物之一，蝉联多年作家富豪榜榜首"},
+				{_id:"", total_day: "4944天", tag:"白金", total_book:"18", img:"images/author1.png", author: "唐家三少", url: "https://my.qidian.com/author/4921", total_word:"3939.54万", brief:"阅文集团白金作家，中国作协主席团委员，北京青联委员，网络文学代表人物之一，蝉联多年作家富豪榜榜首"},
+				{_id:"", total_day: "4944天", tag:"白金", total_book:"18", img:"images/author1.png", author: "唐家三少", url: "https://my.qidian.com/author/4921", total_word:"3939.54万", brief:"阅文集团白金作家，中国作协主席团委员，北京青联委员，网络文学代表人物之一，蝉联多年作家富豪榜榜首"},
+				{_id:"", total_day: "4944天", tag:"白金", total_book:"18", img:"images/author1.png", author: "唐家三少", url: "https://my.qidian.com/author/4921", total_word:"3939.54万", brief:"阅文集团白金作家，中国作协主席团委员，北京青联委员，网络文学代表人物之一，蝉联多年作家富豪榜榜首"},
+				];
+								
+			var num = authors.length;
+			for (var i=0; i<6; i++) {
+				$("#recommended-author").append(
+						'<div class="col-md-2 resent-grid recommended-grid show-video-grid">' +
+							'<div class="resent-grid-img recommended-grid-img">' +
+								'<a href="authorDetail.html"><img src="' + authors[i].img +'" alt="" border="2"/></a>' +
+							'</div>' +
+							'<div class="resent-grid-info recommended-grid-info">' + 
+								'<h5><a href="authorDetail.html" class="title">' + authors[i].author + '</a>&nbsp &nbsp<a style="font-size:14px">'+ authors[i].tag+'</a></h5>' +
+								'<p class="views">作品总数：' + authors[i].total_book + '</p>' +
+								'<p class="views">累计字数：' + authors[i].total_word + '</p>' +
+							'</div>' +
+						'</div>'
+				);
+			}
+			for (var i=0; i<num; i++) {
+				$("#all-author").append(
+						'<div class="col-md-2 resent-grid recommended-grid show-video-grid">' +
+							'<div class="resent-grid-img recommended-grid-img">' +
+								'<a href="authorDetail.html"><img src="' + authors[i].img +'" alt="" border="2"/></a>' +
+							'</div>' +
+							'<div class="resent-grid-info recommended-grid-info">' + 
+								'<h5><a href="authorDetail.html" class="title">' + authors[i].author + '</a>&nbsp &nbsp<a style="font-size:14px">'+ authors[i].tag+'</a></h5>' +
+								'<p class="views">作品总数：' + authors[i].total_book + '</p>' +
+								'<p class="views">累计字数：' + authors[i].total_word + '</p>' +
+							'</div>' +
+						'</div>'
+				);
+			}
+		</script>				
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../static/js/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+  </body>
+</html>
