@@ -10,7 +10,7 @@ app.config['SECRET_KEY'] = '123456'
 @app.route('/')
 @app.route('/index.html')
 def index():
-    books = dbfunc.getBookRandomly()#分页
+    books = dbfunc.getBookByType(18,"玄幻")#分页
     recbook = dbfunc.getBooksByUser("session['user']")
     return render_template('index.html',books = books,recbook = recbook)
 
@@ -22,25 +22,22 @@ def authorList():
 def login():
     user = request.form['user']
     password = request.form['password']
-    if request.form['login'] == u"登录":
-        if dbfunc.login_user(user,password):#测试用户是否正确
-            session["user"] = user
-            return render_template('index.html')
-        else:
-            return render_template('login.html')
-    elif request.form['login'] == u"注册":
-        if dbfunc.test_user(user):#测试用户是否存在
-            return render_template('login.html')
-        else:
-            if dbfunc.insert_user(user,password):#添加用户
-                session["user"] = user
-                return render_template('index.html')
-            else:
-                return render_template('login.html')
+    if dbfunc.login_user(user,password):#测试用户是否正确
+        session["user"] = user
+        return render_template('index.html')
+    else:
+        return render_template('index.html')
 
-@app.route('/header.html')
-def navigation_bar():
-    return render_template('header.html')
+@app.route('/regist',methods=['GET', 'POST'])
+def regist():#缺少偏好列表
+    user = request.form['user']
+    password = request.form['password']
+    if dbfunc.test_user(user):  # 测试用户是否存在
+        return render_template('index.html')
+    else:
+        if dbfunc.insert_user(user, password):  # 添加用户
+            session["user"] = user
+        return render_template('index.html')
 
 @app.route('/recommend.html')
 def recommend():
