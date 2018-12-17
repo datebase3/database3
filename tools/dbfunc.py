@@ -193,3 +193,9 @@ def getBookByAuthor(name):
     for each in relation["book"]:
         books.append(client.database.book.find_one({"title":each}))
     return books
+
+def getBookByTypeFlag(number,flag):
+    return getBookByType(number,type[flag])
+
+def getType(flag):
+    return type1[flag]

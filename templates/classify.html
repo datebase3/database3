@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>小说分类</title>
+<title>小说排行</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="My Play Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
@@ -24,7 +24,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:#272c2e">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="index.html"><h3>源点网络小说简介网</h3></a>
+          <a class="navbar-brand" href="http://localhost:5000/"><h3>源点网络小说简介网</h3></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
 			<div class="top-search">
@@ -48,23 +48,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 				<div class="drop-navigation drop-navigation">
 				  <ul class="nav nav-sidebar">
-					<li><a href="index.html" class="home-icon"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>主页</a></li>
-					<li><a href="authorList.html" class="user-icon"><span class="glyphicon glyphicon-home glyphicon-list-alt" aria-hidden="true"></span>作家列表</a></li>
-					<li><a href="#" class="menu1"><span class="glyphicon glyphicon-home glyphicon-tasks" aria-hidden="true"></span>小说分类<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a></li>
+					<li><a href="http://localhost:5000/" class="home-icon"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>主页</a></li>
+					<li><a href="http://localhost:5000/authors" class="user-icon"><span class="glyphicon glyphicon-home glyphicon-list-alt" aria-hidden="true"></span>作家列表</a></li>
+					<li><a href="#" class="menu1"><span class="glyphicon glyphicon-home glyphicon-tasks" aria-hidden="true"></span>小说排行<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a></li>
 						<ul class="cl-effect-1">
-							<li class="active"><a href="classify.html">玄幻</a></li>
-							<li><a href="classify.html">奇幻</a></li>
-							<li><a href="classify.html">武侠</a></li>
-							<li><a href="classify.html">仙侠</a></li>
-							<li><a href="classify.html">都市</a></li>
-							<li><a href="classify.html">现实</a></li>
-							<li><a href="classify.html">军事</a></li>
-							<li><a href="classify.html">历史</a></li>
-							<li><a href="classify.html">游戏</a></li>
-							<li><a href="classify.html">体育</a></li>
-							<li><a href="classify.html">科幻</a></li>
-							<li><a href="classify.html">灵异</a></li>
-                            <li><a href="classify.html">二次元</a></li>
+							<li><a href="{{ url_for('rankByType',flag = 0) }}">玄幻</a></li>
+							<li><a href="{{ url_for('rankByType',flag = 1) }}">奇幻</a></li>
+							<li><a href="{{ url_for('rankByType',flag = 2) }}">武侠</a></li>
+							<li><a href="{{ url_for('rankByType',flag = 3) }}">仙侠</a></li>
+							<li><a href="{{ url_for('rankByType',flag = 4) }}">都市</a></li>
+							<li><a href="{{ url_for('rankByType',flag = 5) }}">现实</a></li>
+							<li><a href="{{ url_for('rankByType',flag = 6) }}">军事</a></li>
+							<li><a href="{{ url_for('rankByType',flag = 7) }}">历史</a></li>
+							<li><a href="{{ url_for('rankByType',flag = 8) }}">游戏</a></li>
+							<li><a href="{{ url_for('rankByType',flag = 9) }}">体育</a></li>
+							<li><a href="{{ url_for('rankByType',flag = 10) }}">科幻</a></li>
+							<li><a href="{{ url_for('rankByType',flag = 11) }}">灵异</a></li>
+                            <li><a href="{{ url_for('rankByType',flag = 12) }}">二次元</a></li>
 						</ul>
 						<!-- script-for-menu -->
 						<script>
@@ -94,75 +94,49 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div id="all-work" class="recommended-grids english-grid">
 							<div class="recommended-info">
 								<div class="heading">
-									<h3>玄幻小说</h3>
+									<h3>{{ type }}小说排行</h3>
 								</div>
 								<div class="clearfix"> </div>
 							</div>
+                            {% for book in books[0:20] %}
+                            <div class="col-md-2 resent-grid recommended-grid movie-video-grid">
+						    <div class="resent-grid-img recommended-grid-img">
+							<a href="{{ url_for('novelDetail',title=book['title']) }}"><img src="{{ book['image'] }}" alt="" /></a>
+						    </div>
+                            <div class="resent-grid-info recommended-grid-info recommended-grid-movie-info">
+                                <p><a href="{{ url_for('novelDetail',title=book['title']) }}" class="title">{{ book['title'] }}</a></p>
+                                <p class="author author-info"><a href="{{ url_for('authorDetail',name=book['author']) }}" class="author">{{ book['author'] }}</a></p>
+                                <p class="views">
+                                    {% if book['updateflag']==1 %}
+                                        连载中
+                                    {% else %}
+                                        已完结
+                                    {% endif %}
+                                    {{ book['moncount'] }}票</p>
+                            </div>
+                            </div>
+                            {% endfor %}
 						</div>
 					</div>
 				</div>
 				<div class="col-md-2 show-grid-right">
 					<h3>推荐小说</h3>
-					<div class="show-right-grids">
-						<ul>
-							<li class="tv-img"><a href="#"><img src="images/mv.png" alt="" /></a></li>
-							<li><a href="#">English Movies</a></li>
-						</ul>
-					</div>
-					<div class="show-right-grids">
-						<ul>
-							<li class="tv-img"><a href="#"><img src="images/mv.png" alt="" /></a></li>
-							<li><a href="#">Chinese Movies</a></li>
-						</ul>
-					</div>
-					<div class="show-right-grids">
-						<ul>
-							<li class="tv-img"><a href="#"><img src="images/mv.png" alt="" /></a></li>
-							<li><a href="#">Hindi Movies</a></li>
-						</ul>
-					</div>
-					<div class="show-right-grids">
-						<ul>
-							<li class="tv-img"><a href="#"><img src="images/mv.png" alt="" /></a></li>
-							<li><a href="#">Telugu Movies</a></li>
-						</ul>
-					</div>
-					<div class="show-right-grids">
-						<ul>
-							<li class="tv-img"><a href="#"><img src="images/mv.png" alt="" /></a></li>
-							<li><a href="#">Tamil Movies</a></li>
-						</ul>
-					</div>
-					<div class="show-right-grids">
-						<ul>
-							<li class="tv-img"><a href="#"><img src="images/mv.png" alt="" /></a></li>
-							<li><a href="#">Kannada Movies</a></li>
-						</ul>
-					</div>
-					<div class="show-right-grids">
-						<ul>
-							<li class="tv-img"><a href="#"><img src="images/mv.png" alt="" /></a></li>
-							<li><a href="#">Marathi movies</a></li>
-						</ul>
-					</div>
-					<div class="show-right-grids">
-						<ul>
-							<li class="tv-img"><a href="#"><img src="images/mv.png" alt="" /></a></li>
-							<li><a href="#">Tamil Movies</a></li>
-						</ul>
-					</div>
-					<div class="show-right-grids">
-						<ul>
-							<li class="tv-img"><a href="#"><img src="images/mv.png" alt="" /></a></li>
-							<li><a href="#">Kannada Movies</a></li>
-						</ul>
-					</div>
-					<div class="show-right-grids">
-						<ul>
-							<li class="tv-img"><a href="#"><img src="images/mv.png" alt="" /></a></li>
-							<li><a href="#">Marathi movies</a></li>
-						</ul>
-					</div>
+					<div class="single-grid-right">
+                        {% for book in books[20:51] %}
+						<div class="single-right-grids">
+							<div class="col-md-4 single-right-grid-left">
+								<a href="{{ url_for('novelDetail',title=book['title']) }}"><img src="{{ book['image'] }}" alt="" /></a>
+							</div>
+							<div class="col-md-8 single-right-grid-right">
+								<a href="{{ url_for('novelDetail',title=book['title']) }}" class="title"> {{ book['title'] }}</a>
+								<p class="author"><a href="{{ url_for('authorDetail',name=book['author']) }}" class="author">{{ book['author'] }}</a></p>
+								<p class="moncount">{{ book['moncount'] }}票</p>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+                        {% endfor %}
+							<div class="clearfix"> </div>
+						</div>
 				</div>
 				<div class="clearfix"> </div>
 			</div>
@@ -170,35 +144,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 		<div class="clearfix"> </div>
 		<!-- script -->
-		<script>
-			var works = [
-				{_id:"", author:"唐家三少", bookscore:"", brief:"", flag:"", image:"https://bookcover.yuewen.com/qdbimg/349573/1011641567/180", moncount:"", recount:"142.21万", rewardnum:"16", title:"斗罗大陆外传唐门英雄传 ", updateflag:"连载",usercount:"48", wordcount:"9.28万字"},
-				{_id:"", author:"唐家三少", bookscore:"", brief:"", flag:"", image:"https://bookcover.yuewen.com/qdbimg/349573/1011641567/180", moncount:"", recount:"142.21万", rewardnum:"16", title:"斗罗大陆外传唐门英雄传 ", updateflag:"连载",usercount:"48", wordcount:"9.28万字"},
-				{_id:"", author:"唐家三少", bookscore:"", brief:"", flag:"", image:"https://bookcover.yuewen.com/qdbimg/349573/1011641567/180", moncount:"", recount:"142.21万", rewardnum:"16", title:"斗罗大陆外传唐门英雄传 ", updateflag:"连载",usercount:"48", wordcount:"9.28万字"},
-				{_id:"", author:"唐家三少", bookscore:"", brief:"", flag:"", image:"https://bookcover.yuewen.com/qdbimg/349573/1011641567/180", moncount:"", recount:"142.21万", rewardnum:"16", title:"斗罗大陆外传唐门英雄传 ", updateflag:"连载",usercount:"48", wordcount:"9.28万字"},
-				{_id:"", author:"唐家三少", bookscore:"", brief:"", flag:"", image:"https://bookcover.yuewen.com/qdbimg/349573/1011641567/180", moncount:"", recount:"142.21万", rewardnum:"16", title:"斗罗大陆外传唐门英雄传 ", updateflag:"连载",usercount:"48", wordcount:"9.28万字"},
-				{_id:"", author:"唐家三少", bookscore:"", brief:"", flag:"", image:"https://bookcover.yuewen.com/qdbimg/349573/1011641567/180", moncount:"", recount:"142.21万", rewardnum:"16", title:"斗罗大陆外传唐门英雄传 ", updateflag:"连载",usercount:"48", wordcount:"9.28万字"},
-				{_id:"", author:"唐家三少", bookscore:"", brief:"", flag:"", image:"https://bookcover.yuewen.com/qdbimg/349573/1011641567/180", moncount:"", recount:"142.21万", rewardnum:"16", title:"斗罗大陆外传唐门英雄传 ", updateflag:"连载",usercount:"48", wordcount:"9.28万字"},
-				{_id:"", author:"唐家三少", bookscore:"", brief:"", flag:"", image:"https://bookcover.yuewen.com/qdbimg/349573/1011641567/180", moncount:"", recount:"142.21万", rewardnum:"16", title:"斗罗大陆外传唐门英雄传 ", updateflag:"连载",usercount:"48", wordcount:"9.28万字"},
-				];
-								
-			var num = works.length;
-			
-			for (var i=0; i<num; i++) {
-				$("#all-work").append(
-					'<div class="col-md-2 resent-grid recommended-grid movie-video-grid">' +
-						'<div class="resent-grid-img recommended-grid-img">'+
-							'<a href="authorDetail.html"><img src="' + works[i].image + '" alt="" /></a>'+
-						'</div>'+
-						'<div class="resent-grid-info recommended-grid-info recommended-grid-movie-info">'+
-							'<p><a href="authorDetail.html" class="title">' + works[i].title + '</a></p>'+
-							'<p class="author author-info"><a href="#" class="author">'+works[i].author+'</a></p>'+
-							'<p class="views">' + works[i].updateflag + '  '+ works[i].wordcount + '</p>'+
-						'</div>'+
-					'</div>'
-				);
-			}
-		</script>	
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

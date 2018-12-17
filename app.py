@@ -67,5 +67,10 @@ def novelDetail(title):
         dbfunc.updateUser(session['user'],book['flag'])
     return render_template('novalDetail.html', book = book,book_list = book_list)
 
+@app.route('/rankByType/<flag>',methods=['GET','POST'])
+def rankByType(flag):
+    books = dbfunc.getBookByTypeFlag(50,int(flag))
+    return render_template('classify.html', books = books,type = dbfunc.getType(int(flag)))
+
 if __name__ == '__main__':
     app.run(debug = True)
