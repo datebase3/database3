@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding:utf8 -*-
-import random
 import pymongo
 from bson.objectid import ObjectId
 
@@ -23,22 +22,65 @@ type = {
     11:"灵异",
     12:"二次元"
 }
+type1 = {
+    0:u"玄幻",
+    1:u"奇幻",
+    2:u"武侠",
+    3:u"仙侠",
+    4:u"都市",
+    5:u"现实",
+    6:u"军事",
+    7:u"历史",
+    8:u"游戏",
+    9:u"体育",
+    10:u"科幻",
+    11:u"灵异",
+    12:u"二次元"
+}
+name = {
+    0:"xuanhuan",
+    1:"qihuan",
+    2:"wuxia",
+    3:"xianxia",
+    4:"dushi",
+    5:"xianshi",
+    6:"junshi",
+    7:"lishi",
+    8:"youxi",
+    9:"tiyu",
+    10:"kehaun",
+    11:"lingyi",
+    12:"erciyaun"
+}
 
 client = pymongo.MongoClient(MONGO_SERVER['server'], MONGO_SERVER['port'])
 
-def login_user(user,password):
+def getFlagByType(type_name):
+    flag = -1
+    for i in range(0, 13):
+        if type[i] == type_name:
+            flag = i
+            break
+    if flag == -1:
+        for i in range(0, 13):
+            if type1[i] == type_name:
+                flag = i
+                break
+    return flag
+
+def login_user(user,password):#完成
     if client.database.user.find_one({"user": user,"password": password}):
         return True
     else:
         return False
 
-def test_user(user):
+def test_user(user):#完成
     if client.database.user.find_one({"user": user}):
         return True
     else:
         return False
 
-def insert_user(user,password):
+def insert_user(user,password):#未完成
     user_info = {
         "user":user,
         "password":password,
@@ -50,26 +92,19 @@ def insert_user(user,password):
     except Exception:
         return False
 
-def getBookRandomly():
-    numberList = []
-    for i in range(18):
-        numberList.append(random.randint(1,1500))
+def getBookByType(number,type_name):#完成
+    if number == 0:
+        return []
     books = []
-    for number in numberList:
-        for each in client.database.book.find().limit(1).skip(number):
-            books.append(each)
+    flag = getFlagByType(type_name)
+    if flag == -1:
+        return []
+    collection = name[flag]
+    db = client.database
+    dbcol = db[collection]
+    for each in dbcol.find().limit(number):
+        books.append(client.database.book.find_one({'title':each['title']}))
     return books
-
-def getBookByType(number,type_name):
-    books = []
-    for book in client.database.book.find({"flag":type_name}):
-        books.append(book)
-    if books == [] or len(books)<number:
-        return
-    new_books = []
-    for i in range(0,number):
-        new_books.append(books[i])
-    return new_books
 
 def getBooksByUser(user):
     books = []
@@ -90,32 +125,9 @@ def getBooksByUser(user):
                 books.append(book)
     empty_num = 8-len(books)
     if empty_num!=0:
-        for new_book in client.database.book.find():
+        for new_book in client.database.book.find().limit(empty_num):
             books.append(new_book)
-    new_books = []
-    for i in range(8):
-        new_books.append(books[i])
-    return new_books
-
-def getIntroByBook(book):
-    result = client.database.book.find_one({"_id": ObjectId(book)})
-    return result
-
-def prefer_add(user,flag):
-    change_num = -1
-    for key, value in type.items():
-        if flag == value:
-            change_num = key
-    if change_num == -1:
-        return False
-    try:
-        user_info = client.database.user.find_one({"user": user})
-        record = user_info['record']
-        record[change_num] = record[change_num]+1
-        client.database.user.update({'user': user}, {'$set': {'record': record}})
-        return True
-    except Exception:
-        return False
+    return books
 
 def recauthors(user):
     authors = []
@@ -136,3 +148,28 @@ def getAllAuthors():
         if flag >= 18:
             break
     return authors
+
+def getBookByTitle(title):
+    return client.database.book.find_one({"title":title})
+
+def getBookListByTitle(title,type):
+    books = getBookByType(13,type)
+    flag = -1
+    for i in range(0,13):
+        if books[i]['title']==title:
+            flag = i
+            break
+    if flag == -1:
+        books.pop(12)
+    else:
+        books.pop(flag)
+    return books
+
+def updateUser(user,type_name):
+    flag = getFlagByType(type_name)
+    if flag == -1:
+        return
+    user_info = client.database.user.find_one({"user": user})
+    user_record = user_info["record"]
+    user_record[flag] = user_record[flag]+1
+    client.database.user.update({'user': user}, {'$set': {'record': user_record}})

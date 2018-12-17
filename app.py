@@ -47,27 +47,13 @@ def authorList():
     allauthors = dbfunc.getAllAuthors()
     return render_template('authorList.html',recauthors = recauthors,allauthors = allauthors)
 
-@app.route('/introduction',methods=['GET', 'POST'])
-def introduction():
-    book = request.args.get('book')
-    author = request.args.get('author')
-    if book == "0":
-        result = None#getIntroByAuthor(author)
-        return render_template('introduction.html', result=result)#作者介绍界面
-    elif author == "0":
-        user = session["user"]
-        result = dbfunc.getIntroByBook(book)
-        return render_template('introduction.html', result=result)
-        #if dbfunc.prefer_add(user,result['flag']):#用户点击书籍简介的行为会存入其偏好
-        #else:
-            #return redirect(url_for('recommend'))
-    else:
-        return redirect(url_for('recommend'))
-
-
-@app.route('/test.html')
-def test():
-    return render_template('test.html')
+@app.route('/novelDetail/<title>',methods=['GET','POST'])
+def novelDetail(title):
+    book = dbfunc.getBookByTitle(title)
+    book_list = dbfunc.getBookListByTitle(title,book['flag'])
+    if session.get("user"):
+        dbfunc.updateUser(session['user'],book['flag'])
+    return render_template('novalDetail.html', book = book,book_list = book_list)
 
 @app.route('/search.html')
 def go_search():

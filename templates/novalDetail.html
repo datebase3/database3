@@ -93,23 +93,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="single-left-grids">
 							<div class="col-md-4 single-right-grid-left">
 								<!-- single.html 改成起点小说链接 -->
-								<a href="single.html"><img src="https://bookcover.yuewen.com/qdbimg/349573/1011641567/180" alt="" /></a>
+								<a href="{{ book['url'] }}"><img src="{{ book['image'] }}" alt="" /></a>
 							</div>
 							<div class="col-md-8 single-right-grid-right">
 								<!-- single.html 改成起点小说链接 -->
 								<p>
-									<a href="single.html" class="title" style="font-size:24px">斗罗大陆外传唐门英雄传</a>
+									<a href="{{ book['url'] }}" class="title" style="font-size:24px">{{ book['title'] }}</a>
 								</p>
 								<p>
-									<a href="#" class="author" style="font-size:16px">唐家三少&nbsp著</a>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-									<a style="font-size:20px">8.7分</a>
-									<a style="font-size:14px;color:black">*48人评价</a>
+									<a href="#" class="author" style="font-size:16px">{{ book['author'] }}&nbsp著</a>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+									<a style="font-size:20px">{{ book['bookscore'] }}分</a>
+									<a style="font-size:14px;color:black">*{{ book['usercount'] }}人评价</a>
 								</p>
 								<p>
-									<a style="font-size:14px">连载中</a>&nbsp &nbsp &nbsp &nbsp
-									<a style="font-size:14px">玄幻</a>&nbsp &nbsp &nbsp &nbsp
+									<a style="font-size:14px">
+                                        {% if book['updateflag']==1 %}
+                                            连载中
+                                        {% else %}
+                                            已完结
+                                        {% endif %}
+                                    </a>&nbsp &nbsp &nbsp &nbsp
+									<a style="font-size:14px">{{ book['flag'] }}</a>&nbsp &nbsp &nbsp &nbsp
 								</p>
-								<p style="font-size:14px;color:gray">9.28万字&nbsp &nbsp &nbsp &nbsp 166654月票 &nbsp &nbsp &nbsp &nbsp 501923推荐票 &nbsp &nbsp &nbsp &nbsp 16打赏</p>
+								<p style="font-size:14px;color:gray">{{ book['wordcount'] }}字&nbsp &nbsp &nbsp &nbsp {{ book['moncount'] }}月票 &nbsp &nbsp &nbsp &nbsp {{ book['reccount'] }}推荐票 &nbsp &nbsp &nbsp &nbsp {{ book['rewardnum'] }}打赏</p>
 							</div>
 							<div class="clearfix"> </div>
 						</div>
@@ -138,7 +144,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<ul id="myList">
 									<li>
 										<h4>作品信息</h4>
-										<p>这是属于我们唐门的世界，一个个你们所熟悉的唐门英雄会在这场众神之战的大舞台中登场。还记得光之子中的长弓威、狂神雷翔、死神阿呆、仙帝海龙、天帝天痕、琴帝叶音竹、冰火魔厨融念冰、酒神世界的烈焰和姬动、天珠变世界的大力神周维清以及我们的唐三、霍雨浩吗？在这本唐门英雄传中，他们会一一登场，这是属于我们唐门的一场众神之战！燃烧吧，青春的热血！</p>
+										<p>{{ book['brief'] }}</p>
 									</li>
 									
 								</ul>
@@ -149,136 +155,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="col-md-4 single-right">
 					<h3>同类小说推荐</h3>
 					<div class="single-grid-right">
+                        {% for each in book_list %}
 						<div class="single-right-grids">
 							<div class="col-md-4 single-right-grid-left">
-								<a href="single.html"><img src="images/c2.jpg" alt="" /></a>
+								<a href="{{ each['url'] }}"><img src="{{ each['image'] }}" alt="" /></a>
 							</div>
 							<div class="col-md-8 single-right-grid-right">
-								<a href="single.html" class="title"> Nullam interdum metus</a>
-								<p class="author"><a href="#" class="author">John Maniya</a></p>
-								<p class="views">2,114,200 views</p>
+								<a href="{{ each['url'] }}" class="title"> {{ each['title'] }}</a>
+								<p class="author"><a href="#" class="author">{{ each['author'] }}</a></p>
+								<p class="moncount">{{ each['moncount'] }}票</p>
 							</div>
 							<div class="clearfix"> </div>
 						</div>
-						<div class="single-right-grids">
-							<div class="col-md-4 single-right-grid-left">
-								<a href="single.html"><img src="images/c2.jpg" alt="" /></a>
-							</div>
-							<div class="col-md-8 single-right-grid-right">
-								<a href="single.html" class="title"> Nullam interdum metus</a>
-								<p class="author"><a href="#" class="author">John Maniya</a></p>
-								<p class="views">2,114,200 views </p>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="single-right-grids">
-							<div class="col-md-4 single-right-grid-left">
-								<a href="single.html"><img src="images/c2.jpg" alt="" /></a>
-							</div>
-							<div class="col-md-8 single-right-grid-right">
-								<a href="single.html" class="title"> Nullam interdum metus</a>
-								<p class="author"><a href="#" class="author">John Maniya</a></p>
-								<p class="views">2,114,200 views</p>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="single-right-grids">
-							<div class="col-md-4 single-right-grid-left">
-								<a href="single.html"><img src="images/r4.jpg" alt="" /></a>
-							</div>
-							<div class="col-md-8 single-right-grid-right">
-								<a href="single.html" class="title"> Nullam interdum metus</a>
-								<p class="author"><a href="#" class="author">John Maniya</a></p>
-								<p class="views">2,114,200 views</p>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="single-right-grids">
-							<div class="col-md-4 single-right-grid-left">
-								<a href="single.html"><img src="images/c2.jpg" alt="" /></a>
-							</div>
-							<div class="col-md-8 single-right-grid-right">
-								<a href="single.html" class="title"> Nullam interdum metus</a>
-								<p class="author"><a href="#" class="author">John Maniya</a></p>
-								<p class="views">2,114,200 views</p>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="single-right-grids">
-							<div class="col-md-4 single-right-grid-left">
-								<a href="single.html"><img src="images/c2.jpg" alt="" /></a>
-							</div>
-							<div class="col-md-8 single-right-grid-right">
-								<a href="single.html" class="title"> Nullam interdum metus</a>
-								<p class="author">By <a href="#" class="author">John Maniya</a></p>
-								<p class="views">2,114,200 views</p>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="single-right-grids">
-							<div class="col-md-4 single-right-grid-left">
-								<a href="single.html"><img src="images/c2.jpg" alt="" /></a>
-							</div>
-							<div class="col-md-8 single-right-grid-right">
-								<a href="single.html" class="title"> Nullam interdum metus</a>
-								<p class="author"><a href="#" class="author">John Maniya</a></p>
-								<p class="views">2,114,200 views</p>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="single-right-grids">
-							<div class="col-md-4 single-right-grid-left">
-								<a href="single.html"><img src="images/c2.jpg" alt="" /></a>
-							</div>
-							<div class="col-md-8 single-right-grid-right">
-								<a href="single.html" class="title"> Nullam interdum metus</a>
-								<p class="author"><a href="#" class="author">John Maniya</a></p>
-								<p class="views">2,114,200 views</p>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="single-right-grids">
-							<div class="col-md-4 single-right-grid-left">
-								<a href="single.html"><img src="images/c2.jpg" alt="" /></a>
-							</div>
-							<div class="col-md-8 single-right-grid-right">
-								<a href="single.html" class="title"> Nullam interdum metus</a>
-								<p class="author"><a href="#" class="author">John Maniya</a></p>
-								<p class="views">2,114,200 views</p>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="single-right-grids">
-							<div class="col-md-4 single-right-grid-left">
-								<a href="single.html"><img src="images/c2.jpg" alt="" /></a>
-							</div>
-							<div class="col-md-8 single-right-grid-right">
-								<a href="single.html" class="title"> Nullam interdum metus</a>
-								<p class="author"><a href="#" class="author">John Maniya</a></p>
-								<p class="views">2,114,200 views</p>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="single-right-grids">
-							<div class="col-md-4 single-right-grid-left">
-								<a href="single.html"><img src="images/c2.jpg" alt="" /></a>
-							</div>
-							<div class="col-md-8 single-right-grid-right">
-								<a href="single.html" class="title"> Nullam interdum metus</a>
-								<p class="author"><a href="#" class="author">John Maniya</a></p>
-								<p class="views">2,114,200 views</p>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="single-right-grids">
-							<div class="col-md-4 single-right-grid-left">
-								<a href="single.html"><img src="images/c2.jpg" alt="" /></a>
-							</div>
-							<div class="col-md-8 single-right-grid-right">
-								<a href="single.html" class="title"> Nullam interdum metus</a>
-								<p class="author"><a href="#" class="author">John Maniya</a></p>
-								<p class="views">2,114,200 views</p>
-							</div>
+                        {% endfor %}
 							<div class="clearfix"> </div>
 						</div>
 					</div>
