@@ -10,20 +10,20 @@ app.config['SECRET_KEY'] = '123456'
 @app.route('/')
 @app.route('/index.html')
 def index():
-    books = dbfunc.getBookByType(18,"玄幻")
-    return render_template('index.html',books = books,recbook = books)
+    books = dbfunc.getBooksFromFirst()
+    return render_template('index.html',books = books,recbook = books,user_status = 0)
 
 @app.route('/login',methods=['GET', 'POST'])
 def login():#完成
     user = request.form['user']
     password = request.form['password']
-    books = dbfunc.getBooksByMon()
+    books = dbfunc.getBooksFromFirst()
     if dbfunc.login_user(user,password):#测试用户是否正确
         session["user"] = user
         recbook = dbfunc.getBooksByUser(session['user'])
-        return render_template('index.html', books=books, recbook=recbook)
+        return render_template('index.html', books=books, recbook=recbook,user_status = 1,user = user)
     else:
-        return render_template('index.html', books=books, recbook=books)
+        return render_template('index.html', books=books, recbook=books,user_status = 0)
 
 @app.route('/regist',methods=['GET', 'POST'])
 def regist():#完成
@@ -34,14 +34,14 @@ def regist():#完成
         name = "type"+str(i)
         if request.form.get(name):
             prefer_list[i] = 1
-    books = dbfunc.getBooksByMon()
+    books = dbfunc.getBooksFromFirst()
     if dbfunc.test_user(user):  # 测试用户是否存在
-        return render_template('index.html', books=books, recbook=books)
+        return render_template('index.html', books=books, recbook=books,user_status = 0)
     else:
         if dbfunc.insert_user(user, password,prefer_list):  # 添加用户
             session["user"] = user
             recbook = dbfunc.getBooksByUser(session['user'])
-            return render_template('index.html', books=books, recbook=recbook)
+            return render_template('index.html', books=books, recbook=recbook,user_status = 1,user = user)
 
 @app.route('/authors')
 def authorList():

@@ -32,6 +32,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<input type="submit" value=" ">
 				</form>
 			</div>
+            {% if user_status==0 %}
             <div class="header-top-right">
 				<div class="signin">
 					<a href="#small-dialog3" class="play-icon popup-with-zoom-anim">注册</a>
@@ -112,6 +113,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 				<div class="clearfix"> </div>
 			</div>
+                {% else %}
+                <div class="header-top-right">
+                    <div class="navbar-brand">
+                        <h4>{{ user }}</h4>
+                    </div>
+                </div>
+                {% endif %}
         </div>
 		<div class="clearfix"> </div>
       </div>

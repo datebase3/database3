@@ -174,10 +174,10 @@ def updateUser(user,type_name):
     user_record[flag] = user_record[flag]+1
     client.database.user.update({'user': user}, {'$set': {'record': user_record}})
 
-def getBooksByMon():
+def getBooksFromFirst():
     books = []
     flag = 0
-    for book in client.database.book.find().sort("moncount", pymongo.DESCENDING):
+    for book in client.database.book.find():
         books.append(book)
         flag = flag + 1
         if flag >= 18:
