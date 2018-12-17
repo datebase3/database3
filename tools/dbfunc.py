@@ -42,7 +42,7 @@ def insert_user(user,password):
     user_info = {
         "user":user,
         "password":password,
-        "record":[0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1]
+        "record":[0,0,0,0,0,0,0,0,0,0,0,0,0]
     }
     try:
         client.database.user.insert(user_info)
@@ -73,21 +73,21 @@ def getBookByType(number,type_name):
 
 def getBooksByUser(user):
     books = []
-    #user_info = client.database.user.find_one({"user": user})
-    #user_record = user_info["record"]
-    user_record = [0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1]
+    user_info = client.database.user.find_one({"user": user})
+    user_record = user_info["record"]
     total = 0
     for each in user_record:
         total = total+each
-    for key,value in type.items():
-        number = int(8*user_record[key]/total)
-        if number == 0:
-            continue
-        type_name = value
-        if getBookByType(number,type_name)==[]:
-            continue
-        for book in getBookByType(number,type_name):
-            books.append(book)
+    if total!=0:
+        for key,value in type.items():
+            number = int(8*user_record[key]/total)
+            if number == 0:
+                continue
+            type_name = value
+            if getBookByType(number,type_name)==[]:
+                continue
+            for book in getBookByType(number,type_name):
+                books.append(book)
     empty_num = 8-len(books)
     if empty_num!=0:
         for new_book in client.database.book.find():
@@ -111,8 +111,28 @@ def prefer_add(user,flag):
     try:
         user_info = client.database.user.find_one({"user": user})
         record = user_info['record']
-        record[change_num] = record[change_num]+2
+        record[change_num] = record[change_num]+1
         client.database.user.update({'user': user}, {'$set': {'record': record}})
         return True
     except Exception:
         return False
+
+def recauthors(user):
+    authors = []
+    flag = 0
+    for author in client.database.author.find().sort("total_word",pymongo.DESCENDING):
+        authors.append(author)
+        flag = flag+1
+        if flag>=6:
+            break
+    return authors
+
+def getAllAuthors():
+    authors = []
+    flag = 0
+    for author in client.database.author.find().sort("total_day", pymongo.DESCENDING):
+        authors.append(author)
+        flag = flag + 1
+        if flag >= 18:
+            break
+    return authors

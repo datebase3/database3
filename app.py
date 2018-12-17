@@ -10,42 +10,42 @@ app.config['SECRET_KEY'] = '123456'
 @app.route('/')
 @app.route('/index.html')
 def index():
-    books = dbfunc.getBookByType(18,"玄幻")#分页
-    recbook = dbfunc.getBooksByUser("session['user']")
-    return render_template('index.html',books = books,recbook = recbook)
-
-@app.route('/authorList.html')
-def authorList():
-    return render_template('authorList.html')
+    books = dbfunc.getBookByType(18,"玄幻")
+    return render_template('index.html',books = books,recbook = books)
 
 @app.route('/login',methods=['GET', 'POST'])
 def login():
     user = request.form['user']
     password = request.form['password']
+    books = dbfunc.getBookByType(18, "玄幻")
     if dbfunc.login_user(user,password):#测试用户是否正确
         session["user"] = user
-        return render_template('index.html')
+        recbook = dbfunc.getBooksByUser(session['user'])
+        return render_template('index.html', books=books, recbook=recbook)
     else:
-        return render_template('index.html')
+        return render_template('index.html', books=books, recbook=books)
 
 @app.route('/regist',methods=['GET', 'POST'])
 def regist():#缺少偏好列表
     user = request.form['user']
     password = request.form['password']
+    books = dbfunc.getBookByType(18, "玄幻")
     if dbfunc.test_user(user):  # 测试用户是否存在
-        return render_template('index.html')
+        return render_template('index.html', books=books, recbook=books)
     else:
         if dbfunc.insert_user(user, password):  # 添加用户
             session["user"] = user
-        return render_template('index.html')
+            recbook = dbfunc.getBooksByUser(session['user'])
+            return render_template('index.html', books=books, recbook=recbook)
 
-@app.route('/recommend.html')
-def recommend():
+@app.route('/authors')
+def authorList():
     if session.get("user"):
-        result = dbfunc.getBooksByUser(session.get("user"))#通过用户名获取浏览记录，通过看过书的标签获取推荐书单
-        return render_template('recommend.html', result=result)
+        recauthors = dbfunc.recauthors(session['user'])
     else:
-        return render_template('login.html')
+        recauthors = dbfunc.recauthors("???")
+    allauthors = dbfunc.getAllAuthors()
+    return render_template('authorList.html',recauthors = recauthors,allauthors = allauthors)
 
 @app.route('/introduction',methods=['GET', 'POST'])
 def introduction():

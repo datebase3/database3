@@ -98,6 +98,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="clearfix"> </div>
 							</div>
 							<div class="clearfix"> </div>
+                            {% for author in recauthors[0:6] %}
+                            <div class="col-md-2 resent-grid recommended-grid show-video-grid">
+							<div class="resent-grid-img recommended-grid-img">
+								<a href="authorDetail.html"><img src="{{ author['img'] }}" alt="" border="2"/></a>
+							</div>
+							<div class="resent-grid-info recommended-grid-info">
+								<h5><a href="authorDetail.html" class="title">{{ author['author'] }}</a>&nbsp;&nbsp;<a style="font-size:14px">{{ author['tag'] }}</a></h5>
+								<p class="views">作品总数：{{ author['total_book'] }}</p>
+								<p class="views">累计字数：{{ author['total_word'] }}</p>
+							</div>
+						    </div>
+                            {% endfor %}
 						</div>
 						
 					</div>
@@ -110,6 +122,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="clearfix"> </div>
 							</div>
 							<div class="clearfix"> </div>
+                            {% for author in allauthors[0:18] %}
+                            <div class="col-md-2 resent-grid recommended-grid show-video-grid">
+							<div class="resent-grid-img recommended-grid-img">
+								<a href="authorDetail.html"><img src="{{ author['img'] }}" alt="" border="2"/></a>
+							</div>
+							<div class="resent-grid-info recommended-grid-info">
+								<h5><a href="authorDetail.html" class="title">{{ author['author'] }}</a>&nbsp;&nbsp;<a style="font-size:14px">{{ author['tag'] }}</a></h5>
+								<p class="views">作品总数：{{ author['total_book'] }}</p>
+								<p class="views">累计字数：{{ author['total_word'] }}</p>
+							</div>
+						    </div>
+                            {% endfor %}
 						</div>
 					</div>
 				</div>
@@ -118,49 +142,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 		</div>
 		<div class="clearfix"> </div>
-		<!-- script -->
-		<script>
-			var authors = [
-				{_id:"", total_day: "4944天", tag:"白金", total_book:"18", img:"images/author1.png", author: "唐家三少", url: "https://my.qidian.com/author/4921", total_word:"3939.54万", brief:"阅文集团白金作家，中国作协主席团委员，北京青联委员，网络文学代表人物之一，蝉联多年作家富豪榜榜首"},
-				{_id:"", total_day: "4944天", tag:"白金", total_book:"18", img:"images/author1.png", author: "唐家三少", url: "https://my.qidian.com/author/4921", total_word:"3939.54万", brief:"阅文集团白金作家，中国作协主席团委员，北京青联委员，网络文学代表人物之一，蝉联多年作家富豪榜榜首"},
-				{_id:"", total_day: "4944天", tag:"白金", total_book:"18", img:"images/author1.png", author: "唐家三少", url: "https://my.qidian.com/author/4921", total_word:"3939.54万", brief:"阅文集团白金作家，中国作协主席团委员，北京青联委员，网络文学代表人物之一，蝉联多年作家富豪榜榜首"},
-				{_id:"", total_day: "4944天", tag:"白金", total_book:"18", img:"images/author1.png", author: "唐家三少", url: "https://my.qidian.com/author/4921", total_word:"3939.54万", brief:"阅文集团白金作家，中国作协主席团委员，北京青联委员，网络文学代表人物之一，蝉联多年作家富豪榜榜首"},
-				{_id:"", total_day: "4944天", tag:"白金", total_book:"18", img:"images/author1.png", author: "唐家三少", url: "https://my.qidian.com/author/4921", total_word:"3939.54万", brief:"阅文集团白金作家，中国作协主席团委员，北京青联委员，网络文学代表人物之一，蝉联多年作家富豪榜榜首"},
-				{_id:"", total_day: "4944天", tag:"白金", total_book:"18", img:"images/author1.png", author: "唐家三少", url: "https://my.qidian.com/author/4921", total_word:"3939.54万", brief:"阅文集团白金作家，中国作协主席团委员，北京青联委员，网络文学代表人物之一，蝉联多年作家富豪榜榜首"},
-				{_id:"", total_day: "4944天", tag:"白金", total_book:"18", img:"images/author1.png", author: "唐家三少", url: "https://my.qidian.com/author/4921", total_word:"3939.54万", brief:"阅文集团白金作家，中国作协主席团委员，北京青联委员，网络文学代表人物之一，蝉联多年作家富豪榜榜首"},
-				{_id:"", total_day: "4944天", tag:"白金", total_book:"18", img:"images/author1.png", author: "唐家三少", url: "https://my.qidian.com/author/4921", total_word:"3939.54万", brief:"阅文集团白金作家，中国作协主席团委员，北京青联委员，网络文学代表人物之一，蝉联多年作家富豪榜榜首"},
-				];
-								
-			var num = authors.length;
-			for (var i=0; i<6; i++) {
-				$("#recommended-author").append(
-						'<div class="col-md-2 resent-grid recommended-grid show-video-grid">' +
-							'<div class="resent-grid-img recommended-grid-img">' +
-								'<a href="authorDetail.html"><img src="' + authors[i].img +'" alt="" border="2"/></a>' +
-							'</div>' +
-							'<div class="resent-grid-info recommended-grid-info">' + 
-								'<h5><a href="authorDetail.html" class="title">' + authors[i].author + '</a>&nbsp;&nbsp;<a style="font-size:14px">'+ authors[i].tag+'</a></h5>' +
-								'<p class="views">作品总数：' + authors[i].total_book + '</p>' +
-								'<p class="views">累计字数：' + authors[i].total_word + '</p>' +
-							'</div>' +
-						'</div>'
-				);
-			}
-			for (var i=0; i<num; i++) {
-				$("#all-author").append(
-						'<div class="col-md-2 resent-grid recommended-grid show-video-grid">' +
-							'<div class="resent-grid-img recommended-grid-img">' +
-								'<a href="authorDetail.html"><img src="' + authors[i].img +'" alt="" border="2"/></a>' +
-							'</div>' +
-							'<div class="resent-grid-info recommended-grid-info">' + 
-								'<h5><a href="authorDetail.html" class="title">' + authors[i].author + '</a>&nbsp;&nbsp;<a style="font-size:14px">'+ authors[i].tag+'</a></h5>' +
-								'<p class="views">作品总数：' + authors[i].total_book + '</p>' +
-								'<p class="views">累计字数：' + authors[i].total_word + '</p>' +
-							'</div>' +
-						'</div>'
-				);
-			}
-		</script>				
+		
+
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
