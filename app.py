@@ -14,10 +14,10 @@ def index():
     return render_template('index.html',books = books,recbook = books)
 
 @app.route('/login',methods=['GET', 'POST'])
-def login():
+def login():#完成
     user = request.form['user']
     password = request.form['password']
-    books = dbfunc.getBookByType(18, "玄幻")
+    books = dbfunc.getBooksByMon()
     if dbfunc.login_user(user,password):#测试用户是否正确
         session["user"] = user
         recbook = dbfunc.getBooksByUser(session['user'])
@@ -26,26 +26,38 @@ def login():
         return render_template('index.html', books=books, recbook=books)
 
 @app.route('/regist',methods=['GET', 'POST'])
-def regist():#缺少偏好列表
+def regist():#完成
     user = request.form['user']
     password = request.form['password']
-    books = dbfunc.getBookByType(18, "玄幻")
+    prefer_list = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    for i in range(0,13):
+        name = "type"+str(i)
+        if request.form.get(name):
+            prefer_list[i] = 1
+    books = dbfunc.getBooksByMon()
     if dbfunc.test_user(user):  # 测试用户是否存在
         return render_template('index.html', books=books, recbook=books)
     else:
-        if dbfunc.insert_user(user, password):  # 添加用户
+        if dbfunc.insert_user(user, password,prefer_list):  # 添加用户
             session["user"] = user
             recbook = dbfunc.getBooksByUser(session['user'])
             return render_template('index.html', books=books, recbook=recbook)
 
 @app.route('/authors')
 def authorList():
+    allauthors = dbfunc.getAllAuthors()
     if session.get("user"):
         recauthors = dbfunc.recauthors(session['user'])
     else:
-        recauthors = dbfunc.recauthors("???")
-    allauthors = dbfunc.getAllAuthors()
+        recauthors = allauthors
     return render_template('authorList.html',recauthors = recauthors,allauthors = allauthors)
+
+@app.route('/authorDetail/<name>',methods=['GET','POST'])
+def authorDetail(name):
+    author = dbfunc.getAuthorByName(name)
+    author_list = dbfunc.getAllAuthors()
+    books = dbfunc.getBookByAuthor(name)
+    return render_template('authorDetail.html', author = author,author_list = author_list,books = books)
 
 @app.route('/novelDetail/<title>',methods=['GET','POST'])
 def novelDetail(title):
@@ -54,20 +66,6 @@ def novelDetail(title):
     if session.get("user"):
         dbfunc.updateUser(session['user'],book['flag'])
     return render_template('novalDetail.html', book = book,book_list = book_list)
-
-@app.route('/search.html')
-def go_search():
-    return render_template('search.html')
-
-@app.route('/result',methods=['GET', 'POST'])
-def search():
-    if request.method!="POST":
-        return render_template('recommend.html')
-    if request.form['search_con']=="":
-        return render_template('recommend.html')
-    search_con = request.form['search_con']
-    result = None#getbooksbyfind(search_con)#通过搜索内容获取书单
-    return render_template('result.html',result = result)
 
 if __name__ == '__main__':
     app.run(debug = True)

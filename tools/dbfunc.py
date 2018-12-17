@@ -80,11 +80,11 @@ def test_user(user):#完成
     else:
         return False
 
-def insert_user(user,password):#未完成
+def insert_user(user,password,prefer_list):#未完成
     user_info = {
         "user":user,
         "password":password,
-        "record":[0,0,0,0,0,0,0,0,0,0,0,0,0]
+        "record":prefer_list
     }
     try:
         client.database.user.insert(user_info)
@@ -173,3 +173,23 @@ def updateUser(user,type_name):
     user_record = user_info["record"]
     user_record[flag] = user_record[flag]+1
     client.database.user.update({'user': user}, {'$set': {'record': user_record}})
+
+def getBooksByMon():
+    books = []
+    flag = 0
+    for book in client.database.book.find().sort("moncount", pymongo.DESCENDING):
+        books.append(book)
+        flag = flag + 1
+        if flag >= 18:
+            break
+    return books
+
+def getAuthorByName(name):
+    return client.database.author.find_one({"author":name})
+
+def getBookByAuthor(name):
+    relation = client.database.book_author.find_one({"author":name})
+    books = []
+    for each in relation["book"]:
+        books.append(client.database.book.find_one({"title":each}))
+    return books

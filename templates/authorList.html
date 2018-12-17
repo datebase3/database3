@@ -48,8 +48,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 				<div class="drop-navigation drop-navigation">
 				  <ul class="nav nav-sidebar">
-					<li><a href="index.html" class="home-icon"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>主页</a></li>
-					<li class="active"><a href="authorList.html" class="user-icon"><span class="glyphicon glyphicon-home glyphicon-list-alt" aria-hidden="true"></span>作家列表</a></li>
+					<li><a href="http://localhost:5000/" class="home-icon"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>主页</a></li>
+					<li class="active"><a href="http://localhost:5000/authors" class="user-icon"><span class="glyphicon glyphicon-home glyphicon-list-alt" aria-hidden="true"></span>作家列表</a></li>
 					<li><a href="#" class="menu1"><span class="glyphicon glyphicon-home glyphicon-tasks" aria-hidden="true"></span>小说分类<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a></li>
 						<ul class="cl-effect-1">
 							<li><a href="classify.html">玄幻</a></li>                                             
@@ -101,10 +101,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             {% for author in recauthors[0:6] %}
                             <div class="col-md-2 resent-grid recommended-grid show-video-grid">
 							<div class="resent-grid-img recommended-grid-img">
-								<a href="authorDetail.html"><img src="{{ author['img'] }}" alt="" border="2"/></a>
+								<a href="{{ url_for('authorDetail',name=author['author']) }}"><img src="{{ author['img'] }}" alt="" border="2"/></a>
 							</div>
 							<div class="resent-grid-info recommended-grid-info">
-								<h5><a href="authorDetail.html" class="title">{{ author['author'] }}</a>&nbsp;&nbsp;<a style="font-size:14px">{{ author['tag'] }}</a></h5>
+								<h5><a href="{{ url_for('authorDetail',name=author['author']) }}" class="title">{{ author['author'] }}</a>&nbsp;&nbsp;<a style="font-size:14px">{{ author['tag'] }}</a></h5>
 								<p class="views">作品总数：{{ author['total_book'] }}</p>
 								<p class="views">累计字数：{{ author['total_word'] }}</p>
 							</div>
@@ -125,10 +125,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             {% for author in allauthors[0:18] %}
                             <div class="col-md-2 resent-grid recommended-grid show-video-grid">
 							<div class="resent-grid-img recommended-grid-img">
-								<a href="authorDetail.html"><img src="{{ author['img'] }}" alt="" border="2"/></a>
+								<a href="{{ url_for('authorDetail',name=author['author']) }}"><img src="{{ author['img'] }}" alt="" border="2"/></a>
 							</div>
 							<div class="resent-grid-info recommended-grid-info">
-								<h5><a href="authorDetail.html" class="title">{{ author['author'] }}</a>&nbsp;&nbsp;<a style="font-size:14px">{{ author['tag'] }}</a></h5>
+								<h5><a href="{{ url_for('authorDetail',name=author['author']) }}" class="title">{{ author['author'] }}</a>&nbsp;&nbsp;<a style="font-size:14px">{{ author['tag'] }}</a></h5>
 								<p class="views">作品总数：{{ author['total_book'] }}</p>
 								<p class="views">累计字数：{{ author['total_word'] }}</p>
 							</div>

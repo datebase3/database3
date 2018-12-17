@@ -54,19 +54,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <input name="password" type="password" placeholder="密码" required="required" pattern=".{6,}" title="不少于6位" autocomplete="off" /><br>
                                     <p style="font-size:16px;color:#757575">小说类型喜好选择：</p>
                                     <p style="font-size:14px;color:#9E9E9E">
-                                        <input name="type1" type="checkbox" value="玄幻"/>&nbsp;玄幻&nbsp;&nbsp;&nbsp;
+                                        <input name="type0" type="checkbox" value="玄幻"/>&nbsp;玄幻&nbsp;&nbsp;&nbsp;
                                         <input name="type1" type="checkbox" value="奇幻"/>&nbsp;奇幻&nbsp;&nbsp;&nbsp;
-                                        <input name="type1" type="checkbox" value="武侠"/>&nbsp;武侠&nbsp;&nbsp;&nbsp;
-                                        <input name="type1" type="checkbox" value="仙侠"/>&nbsp;仙侠&nbsp;&nbsp;&nbsp;
-                                        <input name="type1" type="checkbox" value="都市"/>&nbsp;都市<br>
-                                        <input name="type1" type="checkbox" value="现实"/>&nbsp;现实&nbsp;&nbsp;&nbsp;
-                                        <input name="type1" type="checkbox" value="军事"/>&nbsp;军事&nbsp;&nbsp;&nbsp;
-                                        <input name="type1" type="checkbox" value="历史"/>&nbsp;历史&nbsp;&nbsp;&nbsp;
-                                        <input name="type1" type="checkbox" value="游戏"/>&nbsp;游戏&nbsp;&nbsp;&nbsp;
-                                        <input name="type1" type="checkbox" value="体育"/>&nbsp;体育<br>
-                                        <input name="type1" type="checkbox" value="科幻"/>&nbsp;科幻&nbsp;&nbsp;&nbsp;
-                                        <input name="type1" type="checkbox" value="灵异"/>&nbsp;灵异&nbsp;&nbsp;&nbsp;
-                                        <input name="type1" type="checkbox" value="二次元"/>&nbsp;二次元<br>
+                                        <input name="type2" type="checkbox" value="武侠"/>&nbsp;武侠&nbsp;&nbsp;&nbsp;
+                                        <input name="type3" type="checkbox" value="仙侠"/>&nbsp;仙侠&nbsp;&nbsp;&nbsp;
+                                        <input name="type4" type="checkbox" value="都市"/>&nbsp;都市<br>
+                                        <input name="type5" type="checkbox" value="现实"/>&nbsp;现实&nbsp;&nbsp;&nbsp;
+                                        <input name="type6" type="checkbox" value="军事"/>&nbsp;军事&nbsp;&nbsp;&nbsp;
+                                        <input name="type7" type="checkbox" value="历史"/>&nbsp;历史&nbsp;&nbsp;&nbsp;
+                                        <input name="type8" type="checkbox" value="游戏"/>&nbsp;游戏&nbsp;&nbsp;&nbsp;
+                                        <input name="type9" type="checkbox" value="体育"/>&nbsp;体育<br>
+                                        <input name="type10" type="checkbox" value="科幻"/>&nbsp;科幻&nbsp;&nbsp;&nbsp;
+                                        <input name="type11" type="checkbox" value="灵异"/>&nbsp;灵异&nbsp;&nbsp;&nbsp;
+                                        <input name="type12" type="checkbox" value="二次元"/>&nbsp;二次元<br>
                                     </p>
                                     <input type="submit"  value="注册"/>
                                 </form>
@@ -126,7 +126,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 				<div class="drop-navigation drop-navigation">
 				  <ul class="nav nav-sidebar">
-					<li class="active"><a href="./index.html" class="home-icon"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>主页</a></li>
+					<li class="active"><a href="http://localhost:5000/" class="home-icon"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>主页</a></li>
 					<li><a href="http://localhost:5000/authors" class="user-icon"><span class="glyphicon glyphicon-home glyphicon-list-alt" aria-hidden="true"></span>作家列表</a></li>
 					<li><a href="#" class="menu1"><span class="glyphicon glyphicon-home glyphicon-tasks" aria-hidden="true"></span>小说分类<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a></li>
 						<ul class="cl-effect-1">
@@ -201,7 +201,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                 <a href="{{ url_for('novelDetail',title=work['title']) }}"><img src="{{ work['image'] }}" alt="" /></a>
                                             </div>
                                             <div class="resent-grid-info recommended-grid-info">
-                                                <p class="author author-info"><a href="#" class="author">{{ work['author'] }}</a></p>
+                                                <p class="author author-info"><a href="{{ url_for('authorDetail',name=work['author']) }}" class="author">{{ work['author'] }}</a></p>
                                                 <p class="views">
                                                 {% if work['updateflag']==1 %}
                                                     连载中
@@ -222,7 +222,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                 <a href="{{ url_for('novelDetail',title=work['title']) }}"><img src="{{ work['image'] }}" alt="" /></a>
                                             </div>
                                             <div class="resent-grid-info recommended-grid-info">
-                                                <p class="author author-info"><a href="#" class="author">{{ work['author'] }}</a></p>
+                                                <p class="author author-info"><a href="{{ url_for('authorDetail',name=work['author']) }}" class="author">{{ work['author'] }}</a></p>
                                                 <p class="views">
                                                 {% if work['updateflag']==1 %}
                                                     连载中
@@ -252,7 +252,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</div>
 							<div class="resent-grid-info recommended-grid-info video-info-grid">
 								<p><a href="{{ url_for('novelDetail',title=work['title']) }}" class="title">{{ work['title'] }}</a></p>
-								<p class="author author-info"><a href="#" class="author">{{ work['author'] }}</a></p>
+								<p class="author author-info"><a href="{{ url_for('authorDetail',name=work['author']) }}" class="author">{{ work['author'] }}</a></p>
 								<p class="views">
                                     {% if work['updateflag']==1 %}
                                         连载中
