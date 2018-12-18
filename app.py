@@ -12,7 +12,11 @@ app.config['SECRET_KEY'] = '123456'
 @app.route('/index.html')
 def index():
     books = dbfunc.getBooksFromFirst()
-    return render_template('index.html',books = books,recbook = books,user_status = 0)
+    if session.get("user"):
+        recbook = dbfunc.getBooksByUser(session['user'])
+        return render_template('index.html', books=books, recbook=recbook, user_status=1,user = session["user"])
+    else:
+        return render_template('index.html',books = books,recbook = books,user_status = 0)
 
 @app.route('/login',methods=['GET', 'POST'])
 def login():#完成
