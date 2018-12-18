@@ -176,12 +176,16 @@ def updateUser(user,type_name):
 
 def getBooksFromFirst():
     books = []
-    flag = 0
-    for book in client.database.book.find():
-        books.append(book)
-        flag = flag + 1
-        if flag >= 18:
-            break
+    for i in range(0,13):
+        number = 0
+        collection = name[i]
+        db = client.database
+        dbcol = db[collection]
+        for book in dbcol.find():
+            books.append(client.database.book.find_one({"title":book["title"]}))
+            number = number + 1
+            if number>2:
+                break
     return books
 
 def getAuthorByName(name):
@@ -199,3 +203,15 @@ def getBookByTypeFlag(number,flag):
 
 def getType(flag):
     return type1[flag]
+
+def test_book(name):
+    if client.database.book.find_one({"title": name}):
+        return True
+    else:
+        return False
+
+def test_author(name):
+    if client.database.author.find_one({"author":name}):
+        return True
+    else:
+        return False

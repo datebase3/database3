@@ -27,9 +27,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div id="navbar" class="navbar-collapse collapse">
 			<div class="top-search">
-				<form class="navbar-form navbar-right">
-					<input type="text" class="form-control" placeholder="搜索...">
-					<input type="submit" value=" ">
+				<form action="http://localhost:5000/search" class="navbar-form navbar-right" method="post">
+					<input name="name" type="text" class="form-control" placeholder="输入搜索内容...">
+					<input type="submit" style="background-color: #2EDACE" value="搜索">
 				</form>
 			</div>
             {% if user_status==0 %}

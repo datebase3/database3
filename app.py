@@ -3,6 +3,7 @@
 
 from flask import Flask, session, redirect, url_for, escape, request,render_template
 from tools import dbfunc
+from urllib import quote
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '123456'
@@ -71,6 +72,23 @@ def novelDetail(title):
 def rankByType(flag):
     books = dbfunc.getBookByTypeFlag(50,int(flag))
     return render_template('classify.html', books = books,type = dbfunc.getType(int(flag)))
+
+@app.route('/search',methods=['GET','POST'])
+def search():
+    if request.form.get("name"):
+        content = request.form["name"]
+        if dbfunc.test_book(content):
+            return redirect("http://localhost:5000/novelDetail/" + content)
+        elif dbfunc.test_author(content):
+            return redirect("http://localhost:5000/authorDetail/" + content)
+    books = dbfunc.getBooksFromFirst()
+    if session.get("user"):
+        recbook = dbfunc.getBooksByUser(session['user'])
+        return render_template('index.html', books=books, recbook=recbook, user_status=1, user=session["user"])
+    else:
+        recbook = books
+        return render_template('index.html', books=books, recbook=recbook, user_status=0)
+
 
 if __name__ == '__main__':
     app.run(debug = True)
